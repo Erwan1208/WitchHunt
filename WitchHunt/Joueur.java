@@ -1,36 +1,79 @@
 import java.util.ArrayList;
 import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+import java.util.Scanner;
+import java.lang.String;
+
+public class Partie {
+   
+    private String gagnant;
 
 
-public class Joueur {
-    
-    private int points;
+    private int round;
 
-    
-    private String pseudo;
+
+    private boolean terminee;
+
+
+    private int nbJoueurs;
+
+ 
+    private int nbIdentitesRevelees;
 
   
-    public List<Rumeur> rumeur = new ArrayList<Rumeur> ();
+    private static  Partie instance;
+
+    
+    public List<Joueur> joueur = new ArrayList<Joueur> ();
+
+  
+    public List<Defausse> defausse = new ArrayList<Defausse> ();
 
    
-    public List<Identite> identite = new ArrayList<Identite> ();
-
-   
-    public void accuserJoueur() {
+    public void terminerPartie() {
     }
 
-    public Joueur() {
+
+    public void commencerRound() {
+    }
+
+
+    public void afficherPointsJoueurs() {
+    }
+
+  
+   
+    public void changerPoints() {
+    }
+
+   
+    public static Partie getInstance() {
+    	
+    	if(instance == null) {
+    		instance=new Partie();
+    	}
+        // Automatically generated method. Please delete this comment before entering specific code.
+        return instance;
+    }
+
+    private Partie() {
+    	this.terminee=false;
+    	this.round=1;
+    	this.nbIdentitesRevelees=0;
+    	System.out.println("Combien de joueur voulez-vous? ");
+    	Scanner sc= new Scanner(System.in);
+    	int nbJoueurs = sc.nextInt();
+    	System.out.println("Il y a " + nbJoueurs + " joueurs");
+    	this.nbJoueurs=nbJoueurs;
+    	sc.close();
+    	for(int i=0;i<nbJoueurs;i++) {
+    		Joueur nouvJoueur=new Joueur();
+    		this.joueur.add(nouvJoueur);
+    	}
     	
     }
     
-    void setPseudo(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
-        this.pseudo = value;
-    }
-
-
-    public void jouer() {
+    public static void main(String[] args) {
+    	
     }
 
 }
