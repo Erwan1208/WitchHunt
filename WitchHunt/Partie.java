@@ -92,7 +92,7 @@ public class Partie {
     	this.terminee=false;
     	this.round=1;
     	this.nbIdentitesRevelees=0;
-    	System.out.println("Combien de joueur voulez-vous? ");
+    	System.out.println("Combien de joueurs voulez-vous? ");
     	Scanner sc= new Scanner(System.in);
     	int nbJoueurs = sc.nextInt();
     	System.out.println("Il y a " + nbJoueurs + " joueurs");
