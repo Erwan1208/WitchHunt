@@ -16,6 +16,12 @@ public class Joueur {
 
 
     public List<Identite> identite = new ArrayList<Identite> ();
+    
+    
+    public void changerPoints() {
+    	
+    	
+    }
 
 
     public void accuserJoueur() {
