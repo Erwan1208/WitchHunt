@@ -34,6 +34,35 @@ public class Partie {
 
    
     public void terminerPartie() {
+    	
+    	//Trouver le maximum
+    	Iterator<Joueur> itr=this.joueur.iterator();
+    	int max=0;
+    	while(itr.hasNext()) {
+    		Joueur player =itr.next();
+    		if(player.points>max) {
+    			max=player.points;
+    		}
+    	}
+    	
+    	//Creer une liste des gagnants
+    	List<String> gagnants= new ArrayList<String>();
+    	Iterator<Joueur> itr2=this.joueur.iterator();
+    	while(itr2.hasNext()) {
+    		Joueur player =itr2.next();
+    		if(player.points==max) {
+    			gagnants.add(player.pseudo);
+    		}
+    	}
+    	
+    	//Donner la liste de tout les gagnants (Dans le cas où il y a égalité)
+    	if(gagnants.size()>1) {
+    		System.out.println("Les gagnants sont"+gagnants);
+    	}
+    	else {
+    		System.out.println("Le gagnant est" + gagnants.get(0));
+    	}
+    	///
     }
 
     public void creerCartesRumeurs() {
@@ -112,12 +141,6 @@ public class Partie {
     	
     }
 
-  
-   
-    public void changerPoints() {
-    	
-    	
-    }
 
    
     public static Partie getInstance() {
@@ -147,9 +170,7 @@ public class Partie {
     }
     
     public static void main(String[] args) {
-    	/* Ajouter la création de 12 cartes rumeurs!
-    	 * On appelle le constructeur Rumeur() 12 fois avec un nom differents correspondant à une carte, et on ajoute la carte à la liste de la classe Partie
-    	 */
+    	
     	
     }
 

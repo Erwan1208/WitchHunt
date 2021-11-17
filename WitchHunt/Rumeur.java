@@ -8,10 +8,10 @@ public class Rumeur {
     private String nom;
 
     @objid ("78f36f62-8477-4126-bd02-bd2d6eeb8ae2")
-    public List<Effet Hunt> effet Hunt = new ArrayList<Effet Hunt> ();
+    public List<EffetHunt> effetHunt = new ArrayList<EffetHunt> ();
 
     @objid ("e973151b-4a97-41ad-b231-9d64e8743574")
-    public List<Effet Witch> effet Witch = new ArrayList<Effet Witch> ();
+    public List<EffetWitch> effetWitch = new ArrayList<EffetWitch> ();
 
     @objid ("cf804039-6806-4dd7-9db6-bce6a2b5805c")
     public void jouerHunt() {
