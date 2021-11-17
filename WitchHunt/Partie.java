@@ -62,7 +62,7 @@ public class Partie {
     	else {
     		System.out.println("Le gagnant est" + gagnants.get(0));
     	}
-    	
+    	///
     }
 
     public void creerCartesRumeurs() {
