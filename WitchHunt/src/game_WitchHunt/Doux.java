@@ -44,7 +44,7 @@ public class Doux implements Strategie {
     	//Adopter une stratégie de jeux au hasard qui ne suit pas une loi uniforme
     	ArrayList[] probabilité = new ArrayList [{A,50},{B,100},{C,200}];
     	
-    	
+    	okok
 
     	if (d == 0) {
     		System.out.println("Le Bot va accuser"+c.accuserJoueur()+"d'être une sorcière !");
