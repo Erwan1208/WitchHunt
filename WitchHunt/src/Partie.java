@@ -99,7 +99,7 @@ public class Partie {
     	this.nbJoueurs=nbJoueurs;
     	sc.close();
     	for(int i=0;i<nbJoueurs;i++) {
-    		Joueur nouvJoueur=new Joueur();
+    		Joueur nouvJoueur=new Joueur("name");
     		this.joueur.add(nouvJoueur);
     	}
     	
