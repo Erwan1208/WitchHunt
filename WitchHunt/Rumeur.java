@@ -18,14 +18,7 @@ public class Rumeur {
     	this.witch=new EffetWitch(nom);
     	
     }
-  
-
     
-    public void jouerHunt() {
-    }
-
-
-    public void jouerWitch() {
-    }
+    
 
 }

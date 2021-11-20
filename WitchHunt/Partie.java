@@ -24,7 +24,7 @@ public class Partie {
     private static  Partie instance;
 
     
-    public List<Joueur> joueur = new ArrayList<Joueur> ();
+    public List<Joueur> joueurs = new ArrayList<Joueur> ();
 
   
     public List<Defausse> defausse = new ArrayList<Defausse> ();
@@ -36,7 +36,7 @@ public class Partie {
     public void terminerPartie() {
     	
     	//Trouver le maximum
-    	Iterator<Joueur> itr=this.joueur.iterator();
+    	Iterator<Joueur> itr=this.joueurs.iterator();
     	int max=0;
     	while(itr.hasNext()) {
     		Joueur player =itr.next();
@@ -47,7 +47,7 @@ public class Partie {
     	
     	//Creer une liste des gagnants
     	List<String> gagnants= new ArrayList<String>();
-    	Iterator<Joueur> itr2=this.joueur.iterator();
+    	Iterator<Joueur> itr2=this.joueurs.iterator();
     	while(itr2.hasNext()) {
     		Joueur player =itr2.next();
     		if(player.points==max) {
@@ -62,6 +62,9 @@ public class Partie {
     	else {
     		System.out.println("Le gagnant est" + gagnants.get(0));
     	}
+    	
+    	this.terminee=true;
+    	System.out.println("La partie est terminee!");
     	
     }
 
@@ -101,13 +104,16 @@ public class Partie {
     		this.creerCartesRumeurs();
     	}
     	
-    	int cartesParPersonne=(int) 12/this.joueur.size();
+    	int cartesParPersonne=(int) 12/this.joueurs.size();
     	
     	//Initiation d'un tableau indiquant si la carte i a été tirée
     	boolean[] carteTire= new boolean[12];
     	for(int i=0;i<12;i++) {
     		carteTire[i]=false;
     	}
+    	
+    	//!!!Possibilité d'utilisé la methode Collections.shuffle()
+    	
     	
     	//On donne [cartesParPersonne] cartes à chaque joueur en tirant au hasard juqu'à ce qu'il n'y ai plus de cartes  
     	for(int numCartes=1;numCartes<cartesParPersonne*this.nbJoueurs;numCartes+=cartesParPersonne) {
@@ -119,7 +125,7 @@ public class Partie {
 	    		if(carteTire[random]==false) {//Si la carte au hasard n'a pas déjà été tiré, la tirer et la donner au joueur 
 	    			carteTire[random]=true;
 	    			Rumeur rum=this.listRumeurs.get(random);
-	    			Joueur player=this.joueur.get((int)numCartes/cartesParPersonne+1); //Permet de savoir à quel joueur on attribut la carte: On commence par le joueur 1, puis 2, puis 3 etc...
+	    			Joueur player=this.joueurs.get((int)numCartes/cartesParPersonne+1); //Permet de savoir à quel joueur on attribut la carte: On commence par le joueur 1, puis 2, puis 3 etc...
 	    			player.rumeur.add(rum);	
 	    		}
 	    		else {
@@ -133,11 +139,15 @@ public class Partie {
 
     public void afficherPointsJoueurs() {
     	
-    	Iterator<Joueur> it= joueur.iterator();
+    	Iterator<Joueur> it= joueurs.iterator();
     	while(it.hasNext()) {
     		Joueur player = it.next();
     		System.out.println("Le joueur"+player.pseudo +"a"+player.points +"points \n" );
     	}
+    	
+    }
+    
+    public void afficherJoueursVivants() {
     	
     }
 
@@ -151,26 +161,59 @@ public class Partie {
         
         return instance;
     }
+    
+    public void accuserJoueur() {
+    }
+
 
     private Partie() {
     	this.terminee=false;
     	this.round=1;
     	this.nbIdentitesRevelees=0;
+    	this.creerCartesRumeurs();
+    	
     	System.out.println("Combien de joueur voulez-vous? ");
     	Scanner sc= new Scanner(System.in);
     	int nbJoueurs = sc.nextInt();
     	System.out.println("Il y a " + nbJoueurs + " joueurs");
     	this.nbJoueurs=nbJoueurs;
     	sc.close();
+    	
     	for(int i=0;i<nbJoueurs;i++) {
-    		Joueur nouvJoueur=new Joueur();
+    		Joueur nouvJoueur=new Joueur(this);
     		this.joueur.add(nouvJoueur);
     	}
     	
     }
     
+    
+    public void jouerTour()
     public static void main(String[] args) {
+    	Partie WitchHunt = new Partie();
     	
+    	while(WitchHunt.terminee=false) {
+    		
+    		//Test de fin de partie
+    		Iterator itj= WitchHunt.joueurs.iterator();
+    		while(itj.hasNext()) {
+    			Joueur joueur=itj.next();
+    			if(joueur.points>5) {
+    				terminee=true;
+    			}
+    		}
+    		
+    		//Deroulement round
+    		WitchHunt.commencerRound();
+    		
+    		for(int i=0;i<WitchHunt.nbJoueurs;i++) {
+    			
+    			
+    			Joueur joueurActif=WitchHunt.joueurs.get(i);//Passage par chaque joueur
+    			
+    			
+    		}
+    		
+    	}
     	
     }
 
