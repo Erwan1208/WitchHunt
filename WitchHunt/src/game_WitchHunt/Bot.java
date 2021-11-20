@@ -17,11 +17,13 @@ public class Bot extends Joueur {
 	 * @param username
 	 * @param identite
 	 */
-    public Bot(String username, String identite) {
-		super(username,identite);
+    public Bot(String username) {
+		super(username);
 		// TODO Auto-generated constructor stub
 	}
     
+    
+    /**
   //initialisation de l'identité du BOT
 	n = (int)(Math.random() * 2);
 	 if (n == 0) {
@@ -30,7 +32,7 @@ public class Bot extends Joueur {
 	 else {
 		 this.identite = "Sorcière";
 	 }
-    
+    */
 	 /**
 	  * Méthode pour accuser un joueur 
 	  * Méthode héritée de la classe Joueur

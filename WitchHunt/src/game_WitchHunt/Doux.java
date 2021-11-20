@@ -24,7 +24,11 @@ public class Doux implements Strategie {
 	// trouver un moyen de faire passer l'attribut personnage de Identité ici
 	private String personnage;
 	
-	public Joueur accuserJoueur(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
+	private String identite;
+
+	private int compteur_cartes;
+	
+	public Joueur accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie) {
 		System.out.println("Le BOT va accuser un joueur d'être une sorcière ! \n");
 		//Choisir un joueur au hasard parmi la liste de joueurs
 		int randomNumber = (int) Math.random();
@@ -36,13 +40,56 @@ public class Doux implements Strategie {
 	
 	
     public void jouer(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
-    	 
+    	 //différente strategie selon l'identité du BOT
+    	// si Sorcière = éviter à tout pris de révéler son identité
+    	// si Vilageois c'est pas si grave
+    	
+    	String test="Villageois";
+		if (test == "Sorcière") {
+    		compteur_cartes = 12/Partie.get_nbJoueurs();
+    		while (compteur_cartes != 1) {
+    			this.accuserJoueur(c, rumeur, Partie);
+    			compteur_cartes--;
+    		}
+    	}
+    	
+    	else if(this.identite = "Villageois") {
+    		
+    	}
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	//Adopter une stratégie de jeux au hasard qui suit une loi uniforme
     	int randNumber = (int) Math.random();
     	int d = randNumber * 2;
     	
     	//Adopter une stratégie de jeux au hasard qui ne suit pas une loi uniforme
-    	ArrayList[] probabilité = new ArrayList [{A,50},{B,100},{C,200}];
     	
     	
 
