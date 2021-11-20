@@ -33,7 +33,7 @@ public class Doux implements Strategie {
 	    return Partie.joueur.get(i);
 	}
 	
-	
+	okok
 	
     public void jouer(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
     	 
