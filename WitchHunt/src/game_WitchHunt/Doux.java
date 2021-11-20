@@ -55,7 +55,8 @@ public class Doux implements Strategie {
     		System.out.println("Le BOT va jouer sa carte Identité ! \n");
     		if Bot.Identite == 
     	}
-    	
+    	oko
+    	ok
     	
     	
     	 //sélection du joueur à accuser
