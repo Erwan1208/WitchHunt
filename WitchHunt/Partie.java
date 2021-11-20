@@ -62,7 +62,7 @@ public class Partie {
     	else {
     		System.out.println("Le gagnant est" + gagnants.get(0));
     	}
-    	///
+    	
     }
 
     public void creerCartesRumeurs() {
@@ -148,7 +148,7 @@ public class Partie {
     	if(instance == null) {
     		instance=new Partie();
     	}
-        // Automatically generated method. Please delete this comment before entering specific code.
+        
         return instance;
     }
 
