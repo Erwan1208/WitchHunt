@@ -187,7 +187,7 @@ public class Partie {
     }
     
     
-    public void jouerTour()
+   
     public static void main(String[] args) {
     	Partie WitchHunt = new Partie();
     	
@@ -198,7 +198,7 @@ public class Partie {
     		while(itj.hasNext()) {
     			Joueur joueur=itj.next();
     			if(joueur.points>5) {
-    				terminee=true;
+    				WitchHunt.terminee=true;
     			}
     		}
     		
@@ -207,8 +207,8 @@ public class Partie {
     		
     		for(int i=0;i<WitchHunt.nbJoueurs;i++) {
     			
-    			
     			Joueur joueurActif=WitchHunt.joueurs.get(i);//Passage par chaque joueur
+    			joueurActif.jouerTour();
     			
     			
     		}

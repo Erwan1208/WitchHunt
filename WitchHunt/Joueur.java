@@ -34,13 +34,35 @@ public class Joueur {
     }
 
     public boolean decideAccuser() {
+    	System.out.println("Veux-tu accuser un joueur?\n");
+    	System.out.println("Ecrit O pour oui et N pour non\n");
+    	Scanner sc = new Scanner(System.in);
+    	String reponse=sc.next();
+    	if(reponse=="O") {
+    		return true;
+    	}
+    	else return false;
+    	
+    	
     }
     
     public String choisirNomAccuse() {
+    	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
+    	Scanner sc = new Scanner(System.in);
+    	String nomAccuse = sc.next();
+    	return nomAccuse;
     	
     }
     
     public boolean choisirRevelerIdentite() {
+    	System.out.println("Veux-tu réveler ton identité?\n");
+    	System.out.println("Ecrit O pour oui et N pour non\n");
+    	Scanner sc = new Scanner(System.in);
+    	String reponse= sc.next();
+    	if(reponse=="O") {
+    		return true;
+    	}
+    	else return false;
     	
     }
     public void jouerTour() {
@@ -55,7 +77,7 @@ public class Joueur {
 				Joueur playerSearch=itAcc.next();
 				if(playerSearch.pseudo==nomAccuse) {
 					
-					//Choix Réponse de l'accus
+					//Choix Réponse de l'accusé
 					if(playerSearch.choisirRevelerIdentite()) {
 						playerSearch.id.revelerIdentite();		
 					}
