@@ -1,7 +1,7 @@
 
 public class Rumeur {
     
-    private String nom;
+    public String nom;
 
   
     public EffetHunt hunt;

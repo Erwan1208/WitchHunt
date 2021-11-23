@@ -27,7 +27,7 @@ public class Partie {
     public List<Joueur> joueurs = new ArrayList<Joueur> ();
 
   
-    public List<Defausse> defausse = new ArrayList<Defausse> ();
+    public Defausse defausse = new Defausse();
     
     
     public List<Rumeur> listRumeurs = new ArrayList<Rumeur> ();
