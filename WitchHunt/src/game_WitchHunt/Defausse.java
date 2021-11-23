@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import game_WitchHunt.Partie;
 
 public class Defausse {
 
@@ -7,12 +9,16 @@ public class Defausse {
 
 
     public void defausserCarte(Rumeur card) {
+    	
     	this.rumeur.add(card);
     }
 
 
-    public void piocherCarte(Rumeur card) {
-    	this.rumeur.remove(card);
+    public Rumeur piocherCarte(Rumeur card) {
+    	Random r = new Random();
+        int n = r.nextInt(12);
+        //ajouter un getter dans partie
+        return Partie.getlistRumeurs[n];
     }
 
 }

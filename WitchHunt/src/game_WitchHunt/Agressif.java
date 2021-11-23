@@ -28,9 +28,9 @@ public class Agressif implements Strategie {
     	}
     	
     	
-    	
-        public void jouer(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
-        	 
+    	/*
+    	public void jouer(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
+       	 
         	//Adopter une stratégie de jeux au hasard
         	
         	int randNumber = (int) Math.random();
@@ -45,6 +45,56 @@ public class Agressif implements Strategie {
         		System.out.println("Le BOT va jouer sa carte Identité ! \n");
         		if Bot.Identite == 
         	}
+    	}*/
+    	
+    	//private game_WitchHunt.EffetWitch EffetWitch;
+        public void jouer(Joueur b, int compteur_cartes,Identite identite, EffetHunt EffetHunt, EffetWitch EffetWitch, Partie Partie) {
+       	
+        //différente strategie selon l'identité du BOT
+       	// si Sorcière = éviter à tout pris de révéler son identité
+       	// si Vilageois c'est pas si grave
+       	
+       	String test="Villageois";
+       	compteur_cartes1 = 12/Partie.get_nbJoueurs();
+   		if (test == "Sorcière") {
+       		while (compteur_cartes1 != 1) {
+       			Joueur accuse = this.accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie);
+       			int randomNumber2 = (int) Math.random();
+       	    	int j = randomNumber2 * 101;
+       	    	if (j == 0) {
+       	    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
+       	    		compteur_cartes1--;
+       	    	}
+       	    	if (j == 1) {
+       	    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
+       	    		compteur_cartes1--;
+       	    	}
+       		}
+       		if (compteur_cartes1 == 1) {
+       			this.identite.revelerIdentite();
+       		}
+       	}
+       	
+       	else if(test == "Villageois") {
+       		int randomNumber3 = (int) Math.random();
+   	    	int k = randomNumber3 * 11;
+   	    	if (k > 0 && k<8) {
+   	    		int randomNumber4 = (int) Math.random();
+   		    	int l = randomNumber4 * 2;
+   		    	if (l == 0) {
+   		    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
+       	    		compteur_cartes1--;
+   		    	}
+   		    	else if (l == 1) {
+   		    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
+       	    		compteur_cartes1--;
+   		    	}
+   	    	}
+   	    	
+   	    	else if ( k >= 8) {
+   	    		this.identite.revelerIdentite();
+   	    	}
+       	}
         	
         	
         	

@@ -25,7 +25,7 @@ public class Partie {
     private static  Partie instance;
 
     
-    public List<Joueur> joueur = new ArrayList<Joueur> ();
+    public static List<Joueur> joueur = new ArrayList<Joueur> ();
 
     public List<Joueur> getList(){
     	return joueur;
