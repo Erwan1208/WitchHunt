@@ -39,7 +39,7 @@ public class Joueur {
     	String Joueur_accuse = scan4.nextLine();
     	return Joueur_accuse;
     }
-    
+          
     /**
      * Constructeur du Joueur
      * @param username
