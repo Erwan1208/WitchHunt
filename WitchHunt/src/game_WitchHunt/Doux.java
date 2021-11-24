@@ -47,16 +47,16 @@ public class Doux implements Strategie {
     	// si Sorcière = éviter à tout pris de révéler son identité
     	// si Vilageois c'est pas si grave
     	int compteur_cartes1;
-    	String test=this.identite;
+    	String test=this.personnage;
     	compteur_cartes1 = (int)12/Partie.get_nbJoueurs();
-		if (test == "Sorcière") {
+		if (this.personnage == "Sorcière") {
     		while (compteur_cartes1 != 1) {
     			Joueur accuse = this.accuserJoueur(c, rumeur, Partie);
     			int randomNumber2 = (int) Math.random();
     	    	int j = randomNumber2 * 2;
     	    	if (j == 0) {
     	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
-    	    		
+    	    		this.EffetHunt.EffetHunt();
     	    		compteur_cartes1--;
     	    	}
     	    	if (j == 1) {

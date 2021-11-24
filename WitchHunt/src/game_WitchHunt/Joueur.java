@@ -22,7 +22,7 @@ public class Joueur {
     
     private String pseudo;
     
-    String identite;
+    private Identite id;
     
     private boolean Est_revele;
 
@@ -48,7 +48,7 @@ public class Joueur {
     	this.setPseudo(username);
     	this.points = 0;
     	this.Est_revele = false;
-    	this.setIdentite(identite);
+    	this.id=new Identite();
     }
     
     /**
