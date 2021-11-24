@@ -9,7 +9,6 @@ public class Defausse {
 
 
     public void defausserCarte(Rumeur card) {
-    	
     	this.rumeur.add(card);
     }
 

@@ -52,7 +52,7 @@ public class Doux implements Strategie {
     	compteur_cartes1 = 12/Partie.get_nbJoueurs();
 		if (test == "Sorcière") {
     		while (compteur_cartes1 != 1) {
-    			Joueur accuse = this.accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie);
+    			Joueur accuse = this.accuserJoueur( c, rumeur, Partie);
     			int randomNumber2 = (int) Math.random();
     	    	int j = randomNumber2 * 2;
     	    	if (j == 0) {
