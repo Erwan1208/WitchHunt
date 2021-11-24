@@ -28,7 +28,7 @@ public class Doux implements Strategie {
 	
 	private String identite;
 
-	private int compteur_cartes1;
+	//private int compteur_cartes1;
 	
 	
 	public Joueur accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie) {
@@ -43,16 +43,16 @@ public class Doux implements Strategie {
 	
 
 	private game_WitchHunt.EffetWitch EffetWitch;
-    public void jouer(Joueur b, int compteur_cartes,Identite identite, EffetHunt EffetHunt, EffetWitch EffetWitch, Partie Partie) {
+    public void jouer(Partie Partie, Rumeur rumeur) {
     	 //différente strategie selon l'identité du BOT
     	// si Sorcière = éviter à tout pris de révéler son identité
     	// si Vilageois c'est pas si grave
-    	
-    	String test="Villageois";
+    	int compteur_cartes1;
+    	String test=this.identite;
     	compteur_cartes1 = 12/Partie.get_nbJoueurs();
 		if (test == "Sorcière") {
     		while (compteur_cartes1 != 1) {
-    			Joueur accuse = this.accuserJoueur( c, rumeur, Partie);
+    			Joueur accuse = this.accuserJoueur(c, rumeur, Partie);
     			int randomNumber2 = (int) Math.random();
     	    	int j = randomNumber2 * 2;
     	    	if (j == 0) {
@@ -76,10 +76,12 @@ public class Doux implements Strategie {
 	    		int randomNumber4 = (int) Math.random();
 		    	int l = randomNumber4 * 2;
 		    	if (l == 0) {
+		    		//appliquer la methodé EffetHunt de la classe EffetHunt sur le joueur accusé
 		    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
     	    		compteur_cartes1--;
 		    	}
 		    	else if (l == 1) {
+		    		//appliquer la méthode EffetWith de la classe EffetWitch sur le joueur accusé
 		    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
     	    		compteur_cartes1--;
 		    	}
