@@ -6,6 +6,8 @@ import java.util.*;
 
 public class Partie {
    
+	public static int indexActif;
+	
     private String gagnant;
 
 
@@ -209,12 +211,14 @@ public class Partie {
     		//Deroulement round
     		WitchHunt.commencerRound();
     		
-    		for(int i=0;i<WitchHunt.nbJoueurs;i++) {
+    		for(indexActif=0;indexActif<WitchHunt.nbJoueurs;indexActif++) {
     			
-    			Joueur joueurActif=WitchHunt.joueurs.get(i);//Passage par chaque joueur
+    			Joueur joueurActif=WitchHunt.joueurs.get(indexActif);
     			if(joueurActif.id.isIdRevelee()==false) {
     				joueurActif.jouerTour();
     			}
+    		
+    		
     			
     			
     			

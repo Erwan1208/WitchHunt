@@ -25,6 +25,7 @@ public class Joueur {
     
     public Joueur(Partie jeuWitchHunt) {
     	this.jeu=jeuWitchHunt;
+    	this.id= new Identite();
     }
 
     void setPseudo(String value) {
@@ -183,7 +184,7 @@ public class Joueur {
     	if(carteJouee.hunt.choisiProchainJoueur) {
     		for(Joueur o: jeu.joueurs) {
     			if(o.pseudo==nomJoueur) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
-    				o.jouerTour();
+    				jeu.indexActif=jeu.joueurs.indexOf(o)-1;
     			}
     		}
     	}
@@ -300,6 +301,7 @@ public class Joueur {
     		this.cartesJouees.remove(carteJouee);
     		
     		
+    		jeu.indexActif=jeu.joueurs.indexOf(this)-1;
     													//PROBLEME:COMMENT ETRE LE PROCHAIN JOUEUR
     	}
     	

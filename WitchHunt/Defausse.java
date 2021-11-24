@@ -13,6 +13,7 @@ public class Defausse {
 
     
     public void piocherCarte() {
+    	
     }
 
     //Commentaire de test
