@@ -79,7 +79,7 @@ public class Doux implements Strategie {
 		    		//appliquer la methodé EffetHunt de la classe EffetHunt sur le joueur accusé
 		    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
     	    		compteur_cartes1--;
-		    	}
+		    	}     
 		    	else if (l == 1) {
 		    		//appliquer la méthode EffetWith de la classe EffetWitch sur le joueur accusé
 		    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
