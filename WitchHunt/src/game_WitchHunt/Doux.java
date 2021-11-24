@@ -48,7 +48,7 @@ public class Doux implements Strategie {
     	// si Vilageois c'est pas si grave
     	int compteur_cartes1;
     	String test=this.identite;
-    	compteur_cartes1 = 12/Partie.get_nbJoueurs();
+    	compteur_cartes1 = (int)12/Partie.get_nbJoueurs();
 		if (test == "Sorcière") {
     		while (compteur_cartes1 != 1) {
     			Joueur accuse = this.accuserJoueur(c, rumeur, Partie);
