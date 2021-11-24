@@ -148,7 +148,11 @@ public class Partie {
     }
     
     public void afficherJoueursVivants() {
-    	
+    	for(Joueur o: this.joueurs) {
+    		if(o.id.isIdRevelee()) {
+    			System.out.println(o.pseudo);
+    		}
+		}
     }
 
 
@@ -208,7 +212,10 @@ public class Partie {
     		for(int i=0;i<WitchHunt.nbJoueurs;i++) {
     			
     			Joueur joueurActif=WitchHunt.joueurs.get(i);//Passage par chaque joueur
-    			joueurActif.jouerTour();
+    			if(joueurActif.id.isIdRevelee()==false) {
+    				joueurActif.jouerTour();
+    			}
+    			
     			
     			
     		}

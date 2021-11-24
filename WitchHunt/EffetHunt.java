@@ -7,9 +7,6 @@ public class EffetHunt {
     public boolean piocherCarteDefausse;
 
    
-    public boolean defausserCarte;
-
-   
     public boolean faireRevelerIdentite;
 
    
