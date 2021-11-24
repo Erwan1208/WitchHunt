@@ -40,10 +40,9 @@ public class Doux implements Strategie {
 	    return Partie.joueur.get(i);
 	}
 	
-	
-
+	 
 	private game_WitchHunt.EffetWitch EffetWitch;
-    public void jouer(Partie Partie, Rumeur rumeur) {
+    public void jouer(Partie Partie, Rumeur rumeur, Identite identite, EffetHunt EffetHunt,EffetWitch EffetWitch) {
     	 //différente strategie selon l'identité du BOT
     	// si Sorcière = éviter à tout pris de révéler son identité
     	// si Vilageois c'est pas si grave
@@ -56,11 +55,13 @@ public class Doux implements Strategie {
     			int randomNumber2 = (int) Math.random();
     	    	int j = randomNumber2 * 2;
     	    	if (j == 0) {
-    	    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
+    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
+    	    		
     	    		compteur_cartes1--;
     	    	}
     	    	if (j == 1) {
-    	    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
+    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
+    	    		
     	    		compteur_cartes1--;
     	    	}
     		}

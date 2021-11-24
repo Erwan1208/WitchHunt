@@ -19,7 +19,7 @@ public class Joueur {
 	//mettre tous les attributs en private
 	
     private int points; 
-
+    
     private String pseudo;
     
     String identite;
