@@ -29,5 +29,11 @@ public class Identite {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.idRevelee = value;
     }
-
+    
+    String getPersonnage() {
+    	return this.personnage;
+    }
+    
+    	
+    
 }
