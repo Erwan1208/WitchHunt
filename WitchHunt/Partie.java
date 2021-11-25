@@ -19,9 +19,6 @@ public class Partie {
 
     private int nbJoueurs;
 
- 
-    private int nbIdentitesRevelees;
-
   
     private static  Partie instance;
 
@@ -128,7 +125,7 @@ public class Partie {
 	    			carteTire[random]=true;
 	    			Rumeur rum=this.listRumeurs.get(random);
 	    			Joueur player=this.joueurs.get((int)numCartes/cartesParPersonne+1); //Permet de savoir à quel joueur on attribut la carte: On commence par le joueur 1, puis 2, puis 3 etc...
-	    			player.rumeur.add(rum);	
+	    			player.rumeurs.add(rum);	
 	    		}
 	    		else {
 	    			numCartesJoueur--;//Si elle a été tirée, on répète le tirage...
@@ -151,7 +148,7 @@ public class Partie {
     
     public void afficherJoueursVivants() {
     	for(Joueur o: this.joueurs) {
-    		if(o.id.isIdRevelee()) {
+    		if(o.id.isIdRevelee()==false) {
     			System.out.println(o.pseudo);
     		}
 		}
@@ -175,7 +172,6 @@ public class Partie {
     private Partie() {
     	this.terminee=false;
     	this.round=1;
-    	this.nbIdentitesRevelees=0;
     	this.creerCartesRumeurs();
     	
     	System.out.println("Combien de joueur voulez-vous? ");
@@ -187,7 +183,7 @@ public class Partie {
     	
     	for(int i=0;i<nbJoueurs;i++) {
     		Joueur nouvJoueur=new Joueur(this);
-    		this.joueur.add(nouvJoueur);
+    		this.joueurs.add(nouvJoueur);
     	}
     	
     }
@@ -200,7 +196,7 @@ public class Partie {
     	while(WitchHunt.terminee=false) {
     		
     		//Test de fin de partie
-    		Iterator itj= WitchHunt.joueurs.iterator();
+    		Iterator<Joueur> itj= WitchHunt.joueurs.iterator();
     		while(itj.hasNext()) {
     			Joueur joueur=itj.next();
     			if(joueur.points>5) {

@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+
 
 
 public class Defausse {
@@ -9,12 +9,11 @@ public class Defausse {
 
    
     public void defausserCarte(Rumeur carte) {
+    	this.listRumeur.add(carte);
     }
-
     
-    public void piocherCarte() {
+    public Defausse() {
     	
     }
 
-    //Commentaire de test
 }

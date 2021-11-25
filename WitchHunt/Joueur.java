@@ -26,6 +26,12 @@ public class Joueur {
     public Joueur(Partie jeuWitchHunt) {
     	this.jeu=jeuWitchHunt;
     	this.id= new Identite();
+    	this.points=0;
+    	System.out.println("Entrer un pseudo");
+    	Scanner sc= new Scanner(System.in);
+    	this.pseudo= sc.next();
+    	sc.close();
+    	
     }
 
     void setPseudo(String value) {

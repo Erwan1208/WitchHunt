@@ -1,4 +1,6 @@
-import com.modeliosoft.modelio.javadesigner.annotations.objid;
+import java.util.Scanner;
+
+
 
 
 public class Identite {
@@ -8,8 +10,19 @@ public class Identite {
     
     private boolean idRevelee;
 
- 
+    
+    
+    public Identite() {
+    	this.idRevelee=false;
+    	System.out.println("Quelle personnage choisis-tu? Taper 'Villageois' ou 'Witch'. \n");
+    	Scanner sc= new Scanner(System.in);
+    	String perso= sc.nextLine();
+    	this.personnage= perso;
+    	sc.close();
+    }
     public void revelerIdentite() {
+    	System.out.println(this.personnage);
+    	this.idRevelee=true;
     }
 
    
