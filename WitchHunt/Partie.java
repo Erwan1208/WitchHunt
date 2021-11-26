@@ -179,6 +179,9 @@ public class Partie {
     	int nbJoueurs = sc.nextInt();
     	System.out.println("Il y a " + nbJoueurs + " joueurs");
     	this.nbJoueurs=nbJoueurs;
+    	System.out.println("Test: Entrer un mot");
+    	String mot = sc.next();
+    	System.out.println(mot);
     	sc.close();
     	
     	for(int i=0;i<nbJoueurs;i++) {

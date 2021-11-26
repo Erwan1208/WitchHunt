@@ -307,8 +307,46 @@ public class Joueur {
     	}
     	
     	if(carteJouee.hunt.faireAccuserAutreJoueur) { 				//PROBLEME:COMMENT SAVOIR QUAND C'EST LE TOUR DE LA PERSONNE
+    																//Le joueur Qui va accuser sera forcement le prochain joueur: Soit Surcharger accuserJoueur() joueur soit tout coder ici!
     		
+    		//Selection de joueur qui devra accuser quelqu'un
+    		jeu.afficherJoueursVivants();
+    		System.out.println("Qui veut tu obliger à accuser?");
+    		Scanner scProchainJoueur= new Scanner(System.in);
+    		String nomProchainJoueur= scProchainJoueur.next();
+    		
+    		//Recherche du joueur qui devra accuser quelqu'un
+    		for(Joueur j : jeu.joueurs) {
+    			if(j.pseudo==nomProchainJoueur) {
+    				
+    				//Changement de l'ordre
+    				int indexProchain = jeu.joueurs.indexOf(j);
+    				jeu.indexActif= indexProchain;
+    				
+    				//Selection de qui ce joueur veut accuser
+    				jeu.afficherJoueursVivants();
+    				System.out.println(nomProchainJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
+    				Scanner scNomAccuse = new Scanner(System.in);
+    				String nomJoueurAccuse = scNomAccuse.next();
+    				
+    				//Recherche du joueur Selectionne
+    				if(nomJoueurAccuse != this.pseudo) {
+    					for (Joueur player : jeu.joueurs) {
+    						if (player.pseudo==nomJoueurAccuse) {
+    							
+    							if(player.choisirRevelerIdentite()) {
+    								player.id.revelerIdentite();		
+    							}
+    							else {
+    								player.jouerWitch(player);
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
     	}
+    	
     	if(carteJouee.hunt.piocherAutreCarteRumeur) {
     		
     		
@@ -359,7 +397,7 @@ public class Joueur {
     	
     	
     	//Afficher et Choisir quelle carte jouee
-    	System.out.println("Quelle carte hunt souhaites-tu jouer?\n");
+    	System.out.println("Quelle carte witch souhaites-tu jouer?\n");
     	Iterator<Rumeur> ithunt = this.rumeurs.iterator();
     	while (ithunt.hasNext()) {
     		System.out.println(ithunt.next().nom);
@@ -461,7 +499,43 @@ public class Joueur {
     	}
     	
     	if(carteJouee.witch.faireAccuserAutreJoueur) {
-    														//PROBLEME: COMMENT CREER UN LISTENER DE L'INDEX ?
+    		
+    		//Selection de joueur qui devra accuser quelqu'un
+    		jeu.afficherJoueursVivants();
+    		System.out.println("Qui veut tu obliger à accuser?");
+    		Scanner scProchainJoueur= new Scanner(System.in);
+    		String nomProchainJoueur= scProchainJoueur.next();
+    		
+    		//Recherche du joueur qui devra accuser quelqu'un
+    		for(Joueur j : jeu.joueurs) {
+    			if(j.pseudo==nomProchainJoueur) {
+    				
+    				//Changement de l'ordre
+    				int indexProchain = jeu.joueurs.indexOf(j);
+    				jeu.indexActif= indexProchain;
+    				
+    				//Selection de qui ce joueur veut accuser
+    				jeu.afficherJoueursVivants();
+    				System.out.println(nomProchainJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
+    				Scanner scNomAccuse = new Scanner(System.in);
+    				String nomJoueurAccuse = scNomAccuse.next();
+    				
+    				//Recherche du joueur Selectionne
+    				if(nomJoueurAccuse != this.pseudo) {
+    					for (Joueur player : jeu.joueurs) {
+    						if (player.pseudo==nomJoueurAccuse) {
+    							
+    							if(player.choisirRevelerIdentite()) {
+    								player.id.revelerIdentite();		
+    							}
+    							else {
+    								player.jouerWitch(player);
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
     	}
     	
     }

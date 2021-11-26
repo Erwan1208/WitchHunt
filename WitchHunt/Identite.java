@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Identite {
     
-    private String personnage;
+    private String personnage = "";
 
     
     private boolean idRevelee;
@@ -14,10 +14,10 @@ public class Identite {
     
     public Identite() {
     	this.idRevelee=false;
-    	System.out.println("Quelle personnage choisis-tu? Taper 'Villageois' ou 'Witch'. \n");
+    	System.out.println("Quelle personnage choisis-tu? Taper 'Villageois' ou 'Witch'.\n");
     	Scanner sc= new Scanner(System.in);
-    	String perso= sc.nextLine();
-    	this.personnage= perso;
+    	String perso = sc.next();
+    	this.personnage = perso;
     	sc.close();
     }
     public void revelerIdentite() {
