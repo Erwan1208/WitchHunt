@@ -76,8 +76,6 @@ public class EffetWitch {
     		break;
     		
     	case "evilEye":
-    		
-    		this.choisiProchainJoueur=true;
     		this.faireAccuserAutreJoueur=true;
     		
     		break;
