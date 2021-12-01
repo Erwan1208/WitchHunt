@@ -1,3 +1,6 @@
+package game_WitchHunt;
+
+
 public class EffetWitch {
 	
 	//La valeur par defaut des booleans est false
@@ -24,9 +27,9 @@ public class EffetWitch {
     
     
     
-    public void EffetWitch(String pseudo){
+    public EffetWitch(String nom){
     	
-    	switch(pseudo) {
+    	switch(nom) {
     	case "angryMob":
     		this.jouerProchain=true;
     		break;
@@ -101,10 +104,6 @@ public class EffetWitch {
     	
     	
     }
-
-
-
-	
     
 
 }

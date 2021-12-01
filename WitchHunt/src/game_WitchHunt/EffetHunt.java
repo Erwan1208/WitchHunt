@@ -1,11 +1,10 @@
+package game_WitchHunt;
+
 public class EffetHunt {
 	
 	//La valeurs par defaut des booleans est false
     
     public boolean piocherCarteDefausse;
-
-   
-    public boolean defausserCarte;
 
    
     public boolean faireRevelerIdentite;
@@ -116,10 +115,5 @@ public class EffetHunt {
     		
     	}
     }
-
-	public void EffetHunt(String pseudo) {
-		// TODO Auto-generated method stub
-		
-	}
 
 }

@@ -1,6 +1,18 @@
 package game_WitchHunt;
 
-import Java.util.Random;
+import java.util.Random;
+import java.util.Scanner;
+
+import game_WitchHunt.Bot;
+import game_WitchHunt.Identite;
+import game_WitchHunt.Partie;
+import game_WitchHunt.Joueur;
+import game_WitchHunt.EffetHunt;
+import game_WitchHunt.EffetWitch;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.random.RandomGenerator;
+import java.util.Scanner;
 
 import game_WitchHunt.Bot;
 import game_WitchHunt.Identite;
@@ -10,104 +22,68 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.random.RandomGenerator;
 
-public class Agressif implements Strategie {
+public class Agressif implements Strategie{
+	int n;
+	
+	// trouver un moyen de faire passer l'attribut personnage de Identité ici
+	//private String personnage;
+	
+	private String identite;
+	
+	//private game_WitchHunt.EffetWitch effetWitch;
 
-    public void jouer(Joueur c) {
-    	int m;
-    	
-    	// trouver un moyen de faire passer l'attribut personnage de Identité ici
-    	private String personnage;
-    	
-    	public Joueur accuserJoueur(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
-    		System.out.println("Le BOT va accuser un joueur d'être une sorcière ! \n");
-    		//Choisir un joueur au hasard parmi la liste de joueurs
-    		int randomNumber = (int) Math.random();
-        	int i = randomNumber * Partie.get_nbJoueurs();
-    	    //System.out.println(Partie.joueur.get(i) + "vous êtes accusé par le BOT d'être une sorcière !\n");
-    	    return Partie.joueur.get(i);
-    	}
-    	
-    	
-    	/*
-    	public void jouer(Joueur c, Rumeur rumeur, Identite Identite, Partie Partie) {
-       	 
-        	//Adopter une stratégie de jeux au hasard
-        	
-        	int randNumber = (int) Math.random();
-        	int d = randNumber * 2;
-
-        	if (d == 0) {
-        		System.out.println("Le Bot va accuser"+c.accuserJoueur()+"d'être une sorcière !");
-        		this.Rumeur();
-        		
-        	}
-        	else if( d == 1) {
-        		System.out.println("Le BOT va jouer sa carte Identité ! \n");
-        		if Bot.Identite == 
-        	}
-    	}*/
-    	
-    	//private game_WitchHunt.EffetWitch EffetWitch;
-        public void jouer(Joueur b, int compteur_cartes,Identite identite, EffetHunt EffetHunt, EffetWitch EffetWitch, Partie Partie) {
-       	
-        //différente strategie selon l'identité du BOT
-       	// si Sorcière = éviter à tout pris de révéler son identité
-       	// si Vilageois c'est pas si grave
-       	
-       	String test="Villageois";
-       	compteur_cartes1 = 12/Partie.get_nbJoueurs();
-   		if (test == "Sorcière") {
-       		while (compteur_cartes1 != 1) {
-       			Joueur accuse = this.accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie);
-       			int randomNumber2 = (int) Math.random();
-       	    	int j = randomNumber2 * 101;
-       	    	if (j == 0) {
-       	    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
-       	    		compteur_cartes1--;
-       	    	}
-       	    	if (j == 1) {
-       	    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
-       	    		compteur_cartes1--;
-       	    	}
-       		}
-       		if (compteur_cartes1 == 1) {
-       			this.identite.revelerIdentite();
-       		}
-       	}
-       	
-       	else if(test == "Villageois") {
-       		int randomNumber3 = (int) Math.random();
-   	    	int k = randomNumber3 * 11;
-   	    	if (k > 0 && k<8) {
-   	    		int randomNumber4 = (int) Math.random();
-   		    	int l = randomNumber4 * 2;
-   		    	if (l == 0) {
-   		    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
-       	    		compteur_cartes1--;
-   		    	}
-   		    	else if (l == 1) {
-   		    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
-       	    		compteur_cartes1--;
-   		    	}
-   	    	}
-   	    	
-   	    	else if ( k >= 8) {
-   	    		this.identite.revelerIdentite();
-   	    	}
-       	}
-        	
-        	
-        	
-        	 //sélection du joueur à accuser
-        	 //Joueur joueur = new Joueur(personnage);
-        	 //List<Joueur> joueur1 = Partie.getList();
-     		
-        	
-        	
-        }
-
-    	
+	//private int compteur_cartes1;
+	
+	
+	public String choisirNomAccuse() {
+    	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
+    	Scanner sc = new Scanner(System.in);
+    	String nomAccuse = sc.next();
+    	sc.close();
+    	return nomAccuse;
     }
+	
+	public void jouer(Partie partie, Identite identite, List<Rumeur> rumeurs, EffetWitch effetwitch, EffetHunt effetHunt) {
+		//savoir combien de cartes dispose le BOT
+		int compteur_cartes=12;
+		compteur_cartes = (int)12/partie.getNbJoueurs();
+		
+		//Si le BOT est sorcière, stratégie de jeu basée sur l'accusation à fond
+		if (this.identite.getPersonnage == "Witch") {
+			//tant que le bot dispose de cartes, il peut accuser
+			while (compteur_cartes != 1) {
+				//définir le joueur à accuser (avec la méthode au dessus)
+				int randomNumber2 = (int) Math.random();
+    	    	int j = randomNumber2 * partie.getNbJoueurs();
+    	    	String accuse = this.choisirNomAccuse();
+    	    	//2 types d'accusation
+    			// générer un nombre aléatoire pour qu'il joue plusieurs types de jeu diff
+    	    	int randomNumber3 = (int) Math.random();
+    	    	int k = randomNumber3 * 2;
+    	    	if (k == 0) {
+    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
+    	    		
+    	    		//prendre une carte au hasard dans la liste de cartes du joueur
+        	    	//appliquer sur cette carte effetwitch ou effethunt avec la méthode équivalente
+    	    		
+    	    		
+        	    	int nb_cartes = rumeurs.size();
+        	    	Rumeur carte_choisie= rumeurs.get((int)(Math.random()*nb_cartes));
+        	    	//carte_choisie;
+    	    	}
+    	    	if (k == 1) {
+    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
+    	    		int nb_cartes = rumeurs.size();
+        	    	Rumeur carte_choisie= rumeurs.get((int)(Math.random()*nb_cartes));
+        	    	carte_choisie.effetHunt.effetHunt();
+    	    	}
+			}
+		}
+		if (this.identite.getPersonnage == "Villageois") {
+			//appliquer la méthode révéler identité
+			//this.identite.revelerIdentite;
+		}
+	}
 
 	
 

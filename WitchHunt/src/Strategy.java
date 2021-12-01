@@ -1,4 +1,4 @@
-
+package game_WitchHunt;
 
 
 public class Strategie_Douce implements Strategie{

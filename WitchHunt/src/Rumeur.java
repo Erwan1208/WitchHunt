@@ -1,21 +1,24 @@
-import java.util.ArrayList;
-import java.util.List;
 
 public class Rumeur {
+    
+    public String nom;
 
-    private String nom;
+  
+    public EffetHunt hunt;
 
     
-    public List<EffetHunt> effetHunt = new ArrayList<EffetHunt> ();
-
+    public EffetWitch witch;
     
-    public List<EffetWitch> effetWitch = new ArrayList<EffetWitch> ();
-
     
-    public void jouerHunt() {
+    public Rumeur(String nom) {
+    	
+    	this.nom=nom;
+    	
+    	this.hunt=new EffetHunt(nom);
+    	this.witch=new EffetWitch(nom);
+    	
     }
-
-    public void jouerWitch() {
-    }
+    
+    
 
 }

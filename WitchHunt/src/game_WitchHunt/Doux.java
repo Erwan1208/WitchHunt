@@ -1,6 +1,7 @@
 package game_WitchHunt;
 
-import Java.util.Random;
+import java.util.Random;
+import java.util.Scanner;
 
 import game_WitchHunt.Bot;
 import game_WitchHunt.Identite;
@@ -21,153 +22,80 @@ import java.util.random.RandomGenerator;
  *
  */
 public class Doux implements Strategie {
-	int n;
 	
 	// trouver un moyen de faire passer l'attribut personnage de Identité ici
 	private String personnage;
 	
 	private String identite;
-
-	//private int compteur_cartes1;
 	
+	//private game_WitchHunt.EffetWitch effetWitch;	
 	
-	public Joueur accuserJoueur(Joueur c, Rumeur rumeur, Partie Partie) {
-		System.out.println("Le BOT va accuser un joueur d'être une sorcière ! \n");
-		//Choisir un joueur au hasard parmi la liste de joueurs
-		int randomNumber = (int) Math.random();
-    	int i = randomNumber * Partie.get_nbJoueurs();
-	    //System.out.println(Partie.joueur.get(i) + "vous êtes accusé par le BOT d'être une sorcière !\n");
-	    return Partie.joueur.get(i);
-	}
+	public String choisirNomAccuse() {
+    	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
+    	Scanner sc = new Scanner(System.in);
+    	String nomAccuse = sc.next();
+    	sc.close();
+    	return nomAccuse;
+    }
 	
-	 
-	private game_WitchHunt.EffetWitch EffetWitch;
-    public void jouer(Partie Partie, Rumeur rumeur, Identite identite, EffetHunt EffetHunt,EffetWitch EffetWitch) {
-    	 //différente strategie selon l'identité du BOT
-    	// si Sorcière = éviter à tout pris de révéler son identité
-    	// si Vilageois c'est pas si grave
-    	int compteur_cartes1;
-    	String test=this.personnage;
-    	compteur_cartes1 = (int)12/Partie.get_nbJoueurs();
-		if (this.personnage == "Sorcière") {
-    		while (compteur_cartes1 != 1) {
-    			Joueur accuse = this.accuserJoueur(c, rumeur, Partie);
-    			int randomNumber2 = (int) Math.random();
-    	    	int j = randomNumber2 * 2;
-    	    	if (j == 0) {
-    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
-    	    		this.EffetHunt.EffetHunt();
-    	    		compteur_cartes1--;
-    	    	}
-    	    	if (j == 1) {
+	public void jouer(Partie partie, Identite identite, List<Rumeur> rumeurs, EffetWitch effetwitch, EffetHunt effetHunt) {
+		//savoir combien de cartes dispose le BOT
+		int compteur_cartes=12;
+		compteur_cartes = (int)12/partie.getNbJoueurs();
+		int randomNumber6 = (int) Math.random();
+    	int m = randomNumber6 * 2;
+		//Si le BOT est sorcière, stratégie de jeu basée sur l'accusation à fond
+		if (m ==0) {
+			//tant que le bot dispose de cartes, il peut accuser
+			//while (compteur_cartes != 1) {
+				//définir le joueur à accuser (avec la méthode au dessus)
+				int randomNumber2 = (int) Math.random();
+    	    	int j = randomNumber2 * partie.getNbJoueurs();
+    	    	String accuse = this.choisirNomAccuse();
+    	    	//2 types d'accusation
+    			// générer un nombre aléatoire pour qu'il joue plusieurs types de jeu diff
+    	    	int randomNumber3 = (int) Math.random();
+    	    	int k = randomNumber3 * 2;
+    	    	if (k == 0) {
     	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
     	    		
-    	    		compteur_cartes1--;
+    	    		//prendre une carte au hasard dans la liste de cartes du joueur
+        	    	//appliquer sur cette carte effetwitch ou effethunt avec la méthode équivalente
+    	    		
+        	    	int nb_cartes = rumeurs.size();
+        	    	Rumeur carte_choisie= rumeurs.get((int)(Math.random()*nb_cartes));
+        	    	//carte_choisie;
     	    	}
-    		}
-    		if (compteur_cartes1 == 1) {
-    			this.identite.revelerIdentite();
-    		}
-    	}
-    	
-    	else if(test == "Villageois") {
-    		int randomNumber3 = (int) Math.random();
-	    	int k = randomNumber3 * 2;
-	    	if (k == 0) {
-	    		int randomNumber4 = (int) Math.random();
-		    	int l = randomNumber4 * 2;
-		    	if (l == 0) {
-		    		//appliquer la methodé EffetHunt de la classe EffetHunt sur le joueur accusé
-		    		((game_WitchHunt.EffetHunt) this.EffetHunt).EffetHunt(accuse.getPseudo());
-    	    		compteur_cartes1--;
-		    	}     
-		    	else if (l == 1) {
-		    		//appliquer la méthode EffetWith de la classe EffetWitch sur le joueur accusé
-		    		((game_WitchHunt.EffetWitch) this.EffetWitch).EffetWitch(accuse.getPseudo());
-    	    		compteur_cartes1--;
-		    	}
-	    	}
-	    	
-	    	else if ( k == 1) {
-	    		this.identite.revelerIdentite();
-	    	}
-    	}
-    	
-	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	
-    	//Adopter une stratégie de jeux au hasard qui suit une loi uniforme
-    	int randNumber = (int) Math.random();
-    	int d = randNumber * 2;
-    	
-    	//Adopter une stratégie de jeux au hasard qui ne suit pas une loi uniforme
-    	
-    	
-
-    	if (d == 0) {
-    		System.out.println("Le Bot va accuser"+c.accuserJoueur()+"d'être une sorcière !");
-    		this.Rumeur();
-    		
-    	}
-    	else if( d == 1) {
-    		System.out.println("Le BOT va jouer sa carte Identité ! \n");
-    		if Bot.identite == 
-    	}
-    	
-    	
-    	 //sélection du joueur à accuser
-    	 //Joueur joueur = new Joueur(personnage);
-    	 //List<Joueur> joueur1 = Partie.getList();
- 		
-    	
-    	
-    }
-
-
-
-
-	private void EffetWitch(String pseudo) {
-		// TODO Auto-generated method stub
-		
+    	    	if (k == 1) {
+    	    		//appliquer la méthode EffetHunt de la classe EffetHunt sur une carte que le joueur joue
+    	    		int nb_cartes = rumeurs.size();
+        	    	Rumeur carte_choisie= rumeurs.get((int)(Math.random()*nb_cartes));
+        	    	carte_choisie.effetHunt.effetHunt();
+    	    	}
+			}
+		//}
+		if (m == 1) {
+			//appliquer la méthode révéler identité
+			//this.identite.revelerIdentite;
+		}
 	}
+	
+	
+	
 
 
 
 
+	private void EffetWitch(String pseudo, EffetWitch effetwitch) {
+		// TODO Auto-generated method stub
+	}
+	
 
 
 	private void EffetHunt(String pseudo) {
 		// TODO Auto-generated method stub
-		
+
 	}
-
-
-
 
 
 

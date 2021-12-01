@@ -1,17 +1,17 @@
-
+package game_WitchHunt;
 
 public class Gerant extends Joueur {
 
-	public Gerant(String username) {
-		super(username);
+	public Gerant(Partie p) {
+		super(p);
 		// TODO Auto-generated constructor stub
 	}
-		public void jouer(Joueur c) {
-	    	super.jouer(c);
+		public void jouer() {
+	    	super.jouerTour();
 	    }
 		
 		public String accuser() {
-	    	super.accuserJoueur(null);
+	    	return super.choisirNomAccuse();
 	    }
 	
 }

@@ -1,23 +1,22 @@
+package game_WitchHunt;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-import game_WitchHunt.Partie;
+
+
 
 public class Defausse {
+    
+    public List<Rumeur> listRumeur = new ArrayList<Rumeur> ();
 
-    public List<Rumeur> rumeur = new ArrayList<Rumeur> ();
-
-
-    public void defausserCarte(Rumeur card) {
-    	this.rumeur.add(card);
+   
+    public void defausserCarte(Rumeur carte) {
     }
 
-
-    public Rumeur piocherCarte(Rumeur card) {
-    	Random r = new Random();
-        int n = r.nextInt(12);
-        //ajouter un getter dans partie
-        return Partie.getlistRumeurs[n];
+    
+    public void piocherCarte() {
+    	
     }
 
+    //Commentaire de test
 }
