@@ -27,7 +27,11 @@ public class Joueur {
     
     public Joueur(Partie jeuWitchHunt) {
     	this.jeu=jeuWitchHunt;
-    	this.id= new Identite();
+    	this.points=0;
+    	
+    	Scanner sc = new Scanner(System.in);
+    	System.out.println("Entrer ton pseudo:\n");
+    	this.pseudo= sc.nextLine();
     }
 
     void setPseudo(String value) {
@@ -40,11 +44,12 @@ public class Joueur {
     }
 
     public boolean decideAccuser() {
-    	System.out.println("Veux-tu accuser un joueur?\n");
+    	System.out.println(this.pseudo+ ", veux-tu accuser un joueur?\n");
     	System.out.println("Ecrit O pour oui et N pour non\n");
-    	Scanner sc = new Scanner(System.in);
-    	String reponse=sc.next();
-    	if(reponse=="O") {
+    	Scanner scanner = new Scanner(System.in);
+    	String reponse=scanner.next();
+    	System.out.println(reponse.equals("O"));
+    	if(reponse.equals("O")) {
     		return true;
     	}
     	else return false;
@@ -56,19 +61,18 @@ public class Joueur {
     	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
     	Scanner sc = new Scanner(System.in);
     	String nomAccuse = sc.next();
-    	sc.close();
     	return nomAccuse;
     	
     }
     
     public boolean choisirRevelerIdentite() {
-    	System.out.println("Veux-tu réveler ton identité?\n");
+    	System.out.println(this.pseudo+ " ,veux-tu réveler ton identité?\n");
     	System.out.println("Ecrit O pour oui et N pour non\n");
     	Scanner sc = new Scanner(System.in);
-    	String reponse= sc.next();
-    	sc.close();
-    	if(reponse=="O") {
+    	String reponse = sc.nextLine();
+    	if(reponse.equals("O")) {
     		return true;
+    	
     	}
     	else return false;
     	
@@ -81,15 +85,23 @@ public class Joueur {
 			jeu.afficherJoueursVivants();
 			String nomAccuse=this.choisirNomAccuse();
 			
+			System.out.println(4);
 			//Recherche de l'accusé
 			Iterator<Joueur> itAcc=jeu.joueurs.iterator();
 			while(itAcc.hasNext()) {
 				Joueur playerSearch=itAcc.next();
-				if(playerSearch.pseudo==nomAccuse) {
-					
+				if(playerSearch.pseudo.equals(nomAccuse)) {
+					System.out.println("Trouvé");
 					//Choix Réponse de l'accusé
 					if(playerSearch.choisirRevelerIdentite()) {
-						playerSearch.id.revelerIdentite();		
+						playerSearch.id.revelerIdentite();
+						jeu.incrementerIdentitesRevelees();
+						if(playerSearch.id.getPersonnage().equals("Witch")) {
+							this.points++;
+							if(jeu.nbIdentitesRevelees!=jeu.getNbJoueurs()-1) {
+		    					jeu.indexActif--;
+		    				}
+						}
 					}
 					else {
 						playerSearch.jouerWitch(this);
@@ -121,7 +133,6 @@ public class Joueur {
     	System.out.println("Entrer le nom de la carte que tu souhaites jouer:\n");
     	Scanner scCarte= new Scanner(System.in);
     	String nomCarte = scCarte.next();
-    	scCarte.close();
     	
     	
     	
@@ -136,7 +147,6 @@ public class Joueur {
     	System.out.println("Entrer son pseudo");
     	Scanner sc = new Scanner(System.in);
     	String nomJoueur = sc.next();
-    	sc.close();
     	
     	
     	//Effets Hunts
@@ -244,7 +254,6 @@ public class Joueur {
         		System.out.println("Souhaitez-vous réveler votre identité?\n Tapez 'O' pour oui ou 'N' pour non\n");
         		Scanner screp = new Scanner(System.in);
         		String reponse= screp.next();
-        		screp.close();
         		
         		for(Joueur j: jeu.joueurs) {
         			if(j.pseudo==nomJoueur) {
@@ -269,7 +278,6 @@ public class Joueur {
         	    			System.out.println("Quelle carte souhaitez-vous défausser?\n Tapez son nom\n");
         	    			Scanner sccarte=new Scanner(System.in);
         	    			String nomDefausse= sccarte.next();
-        	    			sccarte.close();
         	    			for(Rumeur o:j.rumeurs) {
         	    				if(o.nom==nomDefausse) {
         	    					jeu.defausse.defausserCarte(o);
@@ -360,7 +368,6 @@ public class Joueur {
     	System.out.println("Entrer le nom de la carte que tu souhaites jouer:\n");
     	Scanner scCarte= new Scanner(System.in);
     	String nomCarte = scCarte.next();
-    	scCarte.close();
     	
     	
     	//Trouver la carte jouée/selectionée

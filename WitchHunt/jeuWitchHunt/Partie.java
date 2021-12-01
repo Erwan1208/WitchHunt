@@ -1,6 +1,4 @@
-package game_WitchHunt;
-
-
+package jeuWitchHunt;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -22,9 +20,6 @@ public class Partie {
 
     private int nbJoueurs;
 
- 
-    public int nbIdentitesRevelees;
-
   
     private static  Partie instance;
 
@@ -37,15 +32,9 @@ public class Partie {
     
     public List<Rumeur> listRumeurs = new ArrayList<Rumeur> ();
 
-    
-    public void incrementerIdentitesRevelees() {
-    	this.nbIdentitesRevelees++;
-    }
-    
    
     public void terminerPartie() {
     	
-    	System.out.println("Dos");
     	//Trouver le maximum
     	Iterator<Joueur> itr=this.joueurs.iterator();
     	int max=0;
@@ -68,10 +57,10 @@ public class Partie {
     	
     	//Donner la liste de tout les gagnants (Dans le cas où il y a égalité)
     	if(gagnants.size()>1) {
-    		System.out.println("Les gagnants sont "+gagnants);
+    		System.out.println("Les gagnants sont"+gagnants);
     	}
     	else {
-    		System.out.println("Le gagnant est " + gagnants.get(0));
+    		System.out.println("Le gagnant est" + gagnants.get(0));
     	}
     	
     	this.terminee=true;
@@ -81,7 +70,6 @@ public class Partie {
 
     public void creerCartesRumeurs() {
     	Rumeur angryMob= new Rumeur("angryMob");
-    	System.out.println("1");
     	this.listRumeurs.add(angryMob);
     	Rumeur theInquisition= new Rumeur("theInquisition");
     	this.listRumeurs.add(theInquisition);
@@ -112,19 +100,11 @@ public class Partie {
 
     public void commencerRound() {
     	
-    	for(Joueur j : this.joueurs) {
-    		System.out.println(j.pseudo);
-    		j.id= new Identite();
-    	}
-    	
-    	
-    	this.nbIdentitesRevelees=0;
     	if(this.round==1) {
     		this.creerCartesRumeurs();
     	}
     	
     	int cartesParPersonne=(int) 12/this.joueurs.size();
-    	System.out.println("Il y a "+ cartesParPersonne + "cartes par personne" );
     	
     	//Initiation d'un tableau indiquant si la carte i a été tirée
     	boolean[] carteTire= new boolean[12];
@@ -135,19 +115,25 @@ public class Partie {
     	//!!!Possibilité d'utilisé la methode Collections.shuffle()
     	
     	
-    	Collections.shuffle(this.listRumeurs);
-    	
-    	for(int numCartes=0;numCartes<(cartesParPersonne*this.nbJoueurs);numCartes++) {
+    	//On donne [cartesParPersonne] cartes à chaque joueur en tirant au hasard juqu'à ce qu'il n'y ai plus de cartes  
+    	for(int numCartes=1;numCartes<cartesParPersonne*this.nbJoueurs;numCartes+=cartesParPersonne) {
     		
-  
-    			//int nb= (int)numCartes/cartesParPersonne;
-    			//System.out.println(nb);
+    		for(int numCartesJoueur=0;numCartesJoueur<cartesParPersonne;numCartesJoueur++) {
     			
-    			Joueur player = this.joueurs.get((int)numCartes/cartesParPersonne);
-    			player.rumeurs.add(this.listRumeurs.get(numCartes));
+	    		int random= (int) Math.random()*12+1;
+	    		
+	    		if(carteTire[random]==false) {//Si la carte au hasard n'a pas déjà été tiré, la tirer et la donner au joueur 
+	    			carteTire[random]=true;
+	    			Rumeur rum=this.listRumeurs.get(random);
+	    			Joueur player=this.joueurs.get((int)numCartes/cartesParPersonne+1); //Permet de savoir à quel joueur on attribut la carte: On commence par le joueur 1, puis 2, puis 3 etc...
+	    			player.rumeurs.add(rum);	
+	    		}
+	    		else {
+	    			numCartesJoueur--;//Si elle a été tirée, on répète le tirage...
+	    			//Peut être améliorée car cela veut dire qu'il y aura enormement de répétition de tirage quand la plupart des cartes on été tirée
+	    		}
+    		}
     	}
-    	
-    	System.out.println(3);
     }
 
 
@@ -163,7 +149,7 @@ public class Partie {
     
     public void afficherJoueursVivants() {
     	for(Joueur o: this.joueurs) {
-    		if(o.id.isIdRevelee()==false || o.id.getPersonnage().equals("Villageois")) {
+    		if(o.id.isIdRevelee()==false) {
     			System.out.println(o.pseudo);
     		}
 		}
@@ -182,34 +168,19 @@ public class Partie {
     
     public void accuserJoueur() {
     }
-    
-    public void finirRound() {
-    	System.out.println("Round fini");
-    	for(Joueur j :this.joueurs) {
-    		if(j.id.isIdRevelee()==false) {
-    			if (j.id.getPersonnage().equals("Witch")) {
-    				j.points+=2;
-    			}
-    			else j.points+=1;
-    		}
-    	}
-    }
-    
-    public int getNbJoueurs() {
-    	return this.joueurs.size();
-    }
 
 
     private Partie() {
     	this.terminee=false;
     	this.round=1;
+    	this.creerCartesRumeurs();
     	
     	System.out.println("Combien de joueur voulez-vous? ");
     	Scanner sc= new Scanner(System.in);
     	int nbJoueurs = sc.nextInt();
-    	sc.nextLine();
     	System.out.println("Il y a " + nbJoueurs + " joueurs");
     	this.nbJoueurs=nbJoueurs;
+    	sc.close();
     	
     	for(int i=0;i<nbJoueurs;i++) {
     		Joueur nouvJoueur=new Joueur(this);
@@ -222,51 +193,36 @@ public class Partie {
    
     public static void main(String[] args) {
     	Partie WitchHunt = new Partie();
-    
-    	while(WitchHunt.terminee==false) {
+    	
+    	while(WitchHunt.terminee=false) {
     		
-    		
+    		//Test de fin de partie
+    		Iterator<Joueur> itj= WitchHunt.joueurs.iterator();
+    		while(itj.hasNext()) {
+    			Joueur joueur=itj.next();
+    			if(joueur.points>5) {
+    				WitchHunt.terminee=true;
+    			}
+    		}
     		
     		//Deroulement round
     		WitchHunt.commencerRound();
     		
-    		
-    		
-    		
-    		while(WitchHunt.nbIdentitesRevelees!=WitchHunt.nbJoueurs-1) {
-    			for(indexActif=0;indexActif<WitchHunt.nbJoueurs;indexActif++) {
-    				
-        			System.out.println(WitchHunt.nbIdentitesRevelees+"identités révelées\n");
-        			
-        			Joueur joueurActif=WitchHunt.joueurs.get(indexActif);
-        			if(joueurActif.id.isIdRevelee()==false || joueurActif.id.getPersonnage().equals("Villageois")) {
-        				joueurActif.jouerTour();
-        			}
-        			
-        		}
-    		}
-    		
-    		WitchHunt.finirRound();
-    		
-    		
-    		
-    		//Test de fin de partie
-    		Iterator <Joueur>itj= WitchHunt.joueurs.iterator();
-    		while(itj.hasNext()) {
-    			Joueur joueur=itj.next();
-    			if(joueur.points>5) {
-    				System.out.println("Dos");
-    				WitchHunt.terminerPartie();
-    			}
-    		} 
+    		for(indexActif=0;indexActif<WitchHunt.nbJoueurs;indexActif++) {
     			
+    			Joueur joueurActif=WitchHunt.joueurs.get(indexActif);
+    			if(joueurActif.id.isIdRevelee()==false) {
+    				joueurActif.jouerTour();
+    			}
     		
+    		
+    			
+    			
+    			
+    		}
     		
     	}
     	
-    	
     }
-    
-    
 
 }

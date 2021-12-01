@@ -23,7 +23,6 @@ public class Bot extends Joueur {
 	
     public static void JouerDoux(Joueur a) {
     	System.out.println("Le BOT joue facile.");
-    	System.out.println("Le BOT joue agressif.");
     	Partie partie;
     	Identite identite;
     	List<Rumeur> rumeurs;

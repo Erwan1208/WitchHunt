@@ -1,6 +1,9 @@
-package game_WitchHunt;
+package jeuWitchHunt;
+import java.util.*;
+import Java.io.BufferedInputStream;
+import Java.io.IOException;
+import Java.io.InputStream;
 
-import java.util.Scanner;
 
 
 
@@ -17,10 +20,12 @@ public class Identite {
     public Identite() {
     	this.idRevelee=false;
     	System.out.println("Quelle personnage choisis-tu? Taper 'Villageois' ou 'Witch'.\n");
-    	Scanner sc= new Scanner(System.in);		
-    	String perso =sc.nextLine();
-        this.personnage = perso;
-    	
+    	Scanner sc= new Scanner(System.in);
+    	if(sc.hasNext()) {
+    		String perso = sc.next();
+        	this.personnage = perso;
+    	}
+    	else System.out.prinln("Le scanner est vide")
     }
     public void revelerIdentite() {
     	System.out.println(this.personnage);

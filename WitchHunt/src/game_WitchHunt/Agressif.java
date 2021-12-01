@@ -28,7 +28,7 @@ public class Agressif implements Strategie{
 	// trouver un moyen de faire passer l'attribut personnage de Identité ici
 	//private String personnage;
 	
-	private String identite;
+	private Identite identite;
 	
 	//private game_WitchHunt.EffetWitch effetWitch;
 
@@ -49,11 +49,11 @@ public class Agressif implements Strategie{
 		compteur_cartes = (int)12/partie.getNbJoueurs();
 		
 		//Si le BOT est sorcière, stratégie de jeu basée sur l'accusation à fond
-		if (this.identite.getPersonnage == "Witch") {
+		if (this.identite.getPersonnage() == "Witch") {
 			//tant que le bot dispose de cartes, il peut accuser
 			while (compteur_cartes != 1) {
 				//définir le joueur à accuser (avec la méthode au dessus)
-				int randomNumber2 = (int) Math.random();
+				int randomNumber2 = (int) Math.random();							//ERREUR
     	    	int j = randomNumber2 * partie.getNbJoueurs();
     	    	String accuse = this.choisirNomAccuse();
     	    	//2 types d'accusation
