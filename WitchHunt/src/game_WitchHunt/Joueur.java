@@ -85,7 +85,6 @@ public class Joueur {
 			jeu.afficherJoueursVivants();
 			String nomAccuse=this.choisirNomAccuse();
 			
-			System.out.println(4);
 			//Recherche de l'accusé
 			Iterator<Joueur> itAcc=jeu.joueurs.iterator();
 			while(itAcc.hasNext()) {
@@ -188,7 +187,7 @@ public class Joueur {
         		for(Joueur j: jeu.joueurs) {
         			if(j.pseudo==nomJoueur) {
         				j.id.revelerIdentite();
-        				if(j.id.getPersonnage()=="Villageois") {
+        				if(j.id.getPersonnage()=="Villageois") 
         					this.changerPoints(-2);
         					int indexProchain = jeu.joueurs.indexOf(j);
         					jeu.indexActif=indexProchain-1;

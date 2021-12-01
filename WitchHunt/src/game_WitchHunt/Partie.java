@@ -45,7 +45,6 @@ public class Partie {
    
     public void terminerPartie() {
     	
-    	System.out.println("Dos");
     	//Trouver le maximum
     	Iterator<Joueur> itr=this.joueurs.iterator();
     	int max=0;
@@ -81,7 +80,6 @@ public class Partie {
 
     public void creerCartesRumeurs() {
     	Rumeur angryMob= new Rumeur("angryMob");
-    	System.out.println("1");
     	this.listRumeurs.add(angryMob);
     	Rumeur theInquisition= new Rumeur("theInquisition");
     	this.listRumeurs.add(theInquisition);
@@ -147,7 +145,6 @@ public class Partie {
     			player.rumeurs.add(this.listRumeurs.get(numCartes));
     	}
     	
-    	System.out.println(3);
     }
 
 
@@ -255,7 +252,6 @@ public class Partie {
     		while(itj.hasNext()) {
     			Joueur joueur=itj.next();
     			if(joueur.points>5) {
-    				System.out.println("Dos");
     				WitchHunt.terminerPartie();
     			}
     		} 
