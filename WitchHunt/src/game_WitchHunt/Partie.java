@@ -228,7 +228,7 @@ public class Partie {
     	
     }
     
-    
+      
    
     public static void main(String[] args) {
     	Partie WitchHunt = new Partie();

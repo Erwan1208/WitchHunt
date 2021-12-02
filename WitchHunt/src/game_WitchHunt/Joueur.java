@@ -56,7 +56,7 @@ public class Joueur {
     	
     	
     }
-    
+      
     public String choisirNomAccuse() {
     	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
     	Scanner sc = new Scanner(System.in);
