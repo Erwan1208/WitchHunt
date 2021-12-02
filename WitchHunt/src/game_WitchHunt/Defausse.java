@@ -11,12 +11,11 @@ public class Defausse {
 
    
     public void defausserCarte(Rumeur carte) {
+    	this.listRumeur.add(carte);
     }
-
     
-    public void piocherCarte() {
+    public Defausse() {
     	
     }
 
-    //Commentaire de test
 }

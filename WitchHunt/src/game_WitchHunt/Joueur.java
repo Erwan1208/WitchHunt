@@ -80,45 +80,43 @@ public class Joueur {
     	
     }
     public void jouerTour() {
-    	if(this.decideAccuser()) {
-			//Selection de l'accusé
-			jeu.afficherJoueursVivants();
-			String nomAccuse=this.choisirNomAccuse();
-			
-			//Recherche de l'accusé
-			Iterator<Joueur> itAcc=jeu.joueurs.iterator();
-			while(itAcc.hasNext()) {
-				Joueur playerSearch=itAcc.next();
-				if(playerSearch.pseudo.equals(nomAccuse)) {
-					System.out.println("Trouvé");
-					//Choix Réponse de l'accusé 
-					if(playerSearch.choisirRevelerIdentite()) {
-						playerSearch.id.revelerIdentite();
-						jeu.incrementerIdentitesRevelees();
-						if(playerSearch.id.getPersonnage().equals("Witch")) {
-							this.points++;
-							if(jeu.nbIdentitesRevelees!=jeu.getNbJoueurs()-1) {
-		    					jeu.indexActif--;
-		    				}
+    	
+	    
+	    if(jeu.nbIdentitesRevelees != 1) {	
+	    
+	    	if(this.decideAccuser()) {
+				//Selection de l'accusé
+				jeu.afficherJoueursVivants();
+				String nomAccuse=this.choisirNomAccuse();
+				
+				//Recherche de l'accusé
+				Iterator<Joueur> itAcc=jeu.joueurs.iterator();
+				while(itAcc.hasNext()) {
+					Joueur playerSearch=itAcc.next();
+					if(playerSearch.pseudo.equals(nomAccuse)) {
+						System.out.println("Trouvé");
+						//Choix Réponse de l'accusé 
+						if(playerSearch.choisirRevelerIdentite()) {
+							playerSearch.id.revelerIdentite();
+							jeu.incrementerIdentitesRevelees();
+							if(playerSearch.id.getPersonnage().equals("Witch")) {
+								this.points++;
+								if(jeu.nbIdentitesRevelees!=jeu.getNbJoueurs()-1) {
+			    					jeu.indexActif--;
+			    				}
+							}
 						}
-					}
-					else {
-						playerSearch.jouerWitch(this);
+						else {
+							playerSearch.jouerWitch(this);
+						}
 					}
 				}
 			}
-		}
-		else {
-			// si la liste de joueurs restant est différent de 1 il peut jouerHunt sinon on termine le Round
-			if(jeu.joueurs.size() != 1) {	
-				this.jouerHunt();
-			} 
-			else {
-				jeu.finirRound();
-			}
+	    	else this.jouerHunt();
 			
-		}
-    }
+	    }
+	    
+	}
     
     
 
@@ -195,15 +193,16 @@ public class Joueur {
         		for(Joueur j: jeu.joueurs) {
         			if(j.pseudo.equals(nomJoueur)) {
         				j.id.revelerIdentite();
+        				jeu.incrementerIdentitesRevelees();
         				if(j.id.getPersonnage().equals("Villageois")) { 
         					this.changerPoints(-2);
         					int indexProchain = jeu.joueurs.indexOf(j);
-        					jeu.indexActif=indexProchain-1;
+        					jeu.indexActif=(indexProchain-1)%jeu.getNbJoueurs();
         				}
         				else if(j.id.getPersonnage().equals("Witch")) {
         					this.changerPoints(2);
         					int indexProchain = jeu.joueurs.indexOf(this);
-        					jeu.indexActif=indexProchain-1;
+        					jeu.indexActif=(indexProchain-1)%jeu.getNbJoueurs();
         				}
         			}
         			
@@ -214,7 +213,7 @@ public class Joueur {
         	if(carteJouee.hunt.choisiProchainJoueur == true) {
         		for(Joueur o: jeu.joueurs) {
         			if(o.pseudo.equals(nomJoueur)) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
-        				jeu.indexActif=jeu.joueurs.indexOf(o)-1;
+        				jeu.indexActif=(jeu.joueurs.indexOf(o)-1)%jeu.getNbJoueurs();
         			}
         		}
         	}
@@ -222,7 +221,8 @@ public class Joueur {
         	if (carteJouee.hunt.regarderIdentite) {
         		for(Joueur o: jeu.joueurs) {
         			if(o.pseudo.equals(nomJoueur)) {
-        				o.id.revelerIdentite();				//COMMENT FAIRE POUR QUE CE SOIT EN SECRET?
+        				o.id.revelerIdentite();	
+        				jeu.incrementerIdentitesRevelees();//COMMENT FAIRE POUR QUE CE SOIT EN SECRET?
         			}
         		}
         	}
@@ -235,12 +235,15 @@ public class Joueur {
         		System.out.println("Quelle carte Rumeur souhaites-tu piocher?\n");
         		Scanner scRum= new Scanner(System.in);
         		String cartepiochee= scRum.next();
+        		
+        		Rumeur carteChoisi = null;
         		for(Rumeur o: this.cartesJouees) {
         			if(o.nom.equals(cartepiochee)) {
-        				this.rumeurs.add(o);
-        				this.cartesJouees.remove(o);
+        				carteChoisi=o;
         			}
         		}
+        		this.rumeurs.add(carteChoisi);
+				this.cartesJouees.remove(carteChoisi);
         		
         	}
         	
@@ -266,15 +269,16 @@ public class Joueur {
         			if(j.pseudo.equals(nomJoueur)){
         				if(reponse=="O") {
         	    			j.id.revelerIdentite();
+        	    			jeu.incrementerIdentitesRevelees();
         	    			if(j.id.getPersonnage().equals("Villageois")) {
         	    				this.changerPoints(-1);
         	    				int indexProchain= jeu.joueurs.indexOf(j);
-        	    				jeu.indexActif=indexProchain-1;
+        	    				jeu.indexActif=(indexProchain-1)%jeu.getNbJoueurs();
         	    			}
         	    			else if (j.id.getPersonnage().equals("Witch")) {
         	    				this.changerPoints(1);
         	    				int indexProchain= jeu.joueurs.indexOf(this);
-        	    				jeu.indexActif=indexProchain-1;
+        	    				jeu.indexActif=(indexProchain-1)%jeu.getNbJoueurs();
         	    			}
         	    		}
         	    		else {
@@ -298,7 +302,7 @@ public class Joueur {
 	    					
 	    					
     	    				int indexProchain= jeu.joueurs.indexOf(j);
-    	    				jeu.indexActif=indexProchain-1;
+    	    				jeu.indexActif=(indexProchain-1)%jeu.getNbJoueurs();
         	    			
         	    			
         	    		}
@@ -310,10 +314,11 @@ public class Joueur {
         	
         	if(carteJouee.hunt.revelerPropreIdentite) {
         		this.id.revelerIdentite();
+        		jeu.incrementerIdentitesRevelees();
         		if(this.id.getPersonnage().equals("Villageois")) {
         			for(Joueur o: jeu.joueurs) {
             			if(o.pseudo.equals(nomJoueur)) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
-            				jeu.indexActif=jeu.joueurs.indexOf(o)-1;
+            				jeu.indexActif=(jeu.joueurs.indexOf(o)-1)%jeu.getNbJoueurs();
             			}
             		}
         		}
@@ -338,11 +343,15 @@ public class Joueur {
         		Scanner scNomCarte = new Scanner(System.in);
         		String nomDeCarte= scNomCarte.next();
         		for(Joueur j : jeu.joueurs) {
-        			for(Rumeur carte: j.cartesJouees)
+        			Rumeur carteChoisi= null;
+        			for(Rumeur carte: j.cartesJouees) {
         				if(carte.nom.equals(nomDeCarte)) {
-        					this.rumeurs.add(carte);
-        					j.cartesJouees.remove(carte);
+        					carteChoisi=carte;
         				}
+        			}
+        			this.rumeurs.add(carteChoisi);
+					j.cartesJouees.remove(carteChoisi);
+        			
         		}
         		
         		
@@ -365,7 +374,7 @@ public class Joueur {
         		this.cartesJouees.remove(carteJouee);
         		
         		
-        		jeu.indexActif=jeu.joueurs.indexOf(this)-1;
+        		jeu.indexActif=(jeu.joueurs.indexOf(this)-1)%jeu.getNbJoueurs();
         													//PROBLEME:COMMENT ETRE LE PROCHAIN JOUEUR
         	}
         	
@@ -397,7 +406,8 @@ public class Joueur {
         						if (player.pseudo.equals(nomJoueurAccuse)) {
         							
         							if(player.choisirRevelerIdentite()) {
-        								player.id.revelerIdentite();		
+        								player.id.revelerIdentite();
+        								jeu.incrementerIdentitesRevelees();
         							}
         							else {
         								player.jouerWitch(player);
@@ -408,14 +418,10 @@ public class Joueur {
         			}
         		}
         	}
-        	
+    	
         
-        	
     	}
-    	
-    	else System.out.println("carteJouee=null");
-        
-    	
+    	else System.out.println("carteJouee=null");	
     }
 
     public void jouerWitch(Joueur accusateur) {
@@ -494,7 +500,7 @@ public class Joueur {
     	}
     	
     	if(carteJouee.witch.jouerProchain) {
-    		jeu.indexActif=jeu.joueurs.indexOf(this)-1;
+    		jeu.indexActif=(jeu.joueurs.indexOf(this)-1)%jeu.getNbJoueurs();
     	}
     	if(carteJouee.witch.piocherPropreCarteRumeur) {
     		for(Rumeur carte: this.cartesJouees) {
@@ -530,7 +536,7 @@ public class Joueur {
     		for(Joueur j : jeu.joueurs) {
     			if(j.pseudo.equals(nomProchainJoueur)) {
     				int indexProchain = jeu.joueurs.indexOf(j);
-    				jeu.indexActif= indexProchain-1;
+    				jeu.indexActif= (indexProchain-1)%jeu.getNbJoueurs();
     			}
     		}
     	}
@@ -549,7 +555,7 @@ public class Joueur {
     				
     				//Changement de l'ordre
     				int indexProchain = jeu.joueurs.indexOf(j);
-    				jeu.indexActif= indexProchain;
+    				jeu.indexActif= indexProchain%jeu.getNbJoueurs();
     				
     				//Selection de qui ce joueur veut accuser
     				jeu.afficherJoueursVivants();
@@ -563,7 +569,8 @@ public class Joueur {
     						if (player.pseudo.equals(nomJoueurAccuse)) {
     							
     							if(player.choisirRevelerIdentite()) {
-    								player.id.revelerIdentite();		
+    								player.id.revelerIdentite();
+    								jeu.incrementerIdentitesRevelees();
     							}
     							else {
     								player.jouerWitch(player);
