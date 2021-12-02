@@ -151,17 +151,15 @@ public class Joueur {
     	//Effets Hunts
     	
     	//Trouver la carte jouée/selectionée
-    	Iterator<Rumeur> itRum= this.rumeurs.iterator();
     	Rumeur carteJouee = null;
-    	while(itRum.hasNext()) {
-    		Rumeur carte=itRum.next();
-    		if(carte.nom==nomCarte) {
-    			carteJouee=carte;
-    			this.rumeurs.remove(carteJouee);
-    			this.cartesJouees.add(carteJouee);
-    		}
+    	for(Rumeur r : this.rumeurs) {
+    		if(r.nom.equals(nomCarte)) {
+    			carteJouee=r;
     			
+    		}
     	}
+    	this.rumeurs.remove(carteJouee);
+		this.cartesJouees.add(carteJouee);
     	
     	
     	
@@ -169,6 +167,9 @@ public class Joueur {
     	//Faire ses effets
     	if (carteJouee != null) {
         	
+    		System.out.println("Carte trouvé");
+    		
+    		
         	if(carteJouee.hunt.piocherCarteDefausse) {
         		
         		//Piocher carte au hasard de la défausse
@@ -185,14 +186,14 @@ public class Joueur {
         	
         	if(carteJouee.hunt.faireRevelerIdentite) {
         		for(Joueur j: jeu.joueurs) {
-        			if(j.pseudo==nomJoueur) {
+        			if(j.pseudo.equals(nomJoueur)) {
         				j.id.revelerIdentite();
-        				if(j.id.getPersonnage()=="Villageois") 
+        				if(j.id.getPersonnage().equals("Villageois")) { 
         					this.changerPoints(-2);
         					int indexProchain = jeu.joueurs.indexOf(j);
         					jeu.indexActif=indexProchain-1;
         				}
-        				else if(j.id.getPersonnage()=="Witch") {
+        				else if(j.id.getPersonnage().equals("Witch")) {
         					this.changerPoints(2);
         					int indexProchain = jeu.joueurs.indexOf(this);
         					jeu.indexActif=indexProchain-1;
@@ -203,9 +204,9 @@ public class Joueur {
       	
         	 }
         	
-        	if(carteJouee.hunt.choisiProchainJoueur) {
+        	if(carteJouee.hunt.choisiProchainJoueur == true) {
         		for(Joueur o: jeu.joueurs) {
-        			if(o.pseudo==nomJoueur) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
+        			if(o.pseudo.equals(nomJoueur)) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
         				jeu.indexActif=jeu.joueurs.indexOf(o)-1;
         			}
         		}
@@ -213,7 +214,7 @@ public class Joueur {
         	
         	if (carteJouee.hunt.regarderIdentite) {
         		for(Joueur o: jeu.joueurs) {
-        			if(o.pseudo==nomJoueur) {
+        			if(o.pseudo.equals(nomJoueur)) {
         				o.id.revelerIdentite();				//COMMENT FAIRE POUR QUE CE SOIT EN SECRET?
         			}
         		}
@@ -228,7 +229,7 @@ public class Joueur {
         		Scanner scRum= new Scanner(System.in);
         		String cartepiochee= scRum.next();
         		for(Rumeur o: this.cartesJouees) {
-        			if(o.nom==cartepiochee) {
+        			if(o.nom.equals(cartepiochee)) {
         				this.rumeurs.add(o);
         				this.cartesJouees.remove(o);
         			}
@@ -238,7 +239,7 @@ public class Joueur {
         	
         	if(carteJouee.hunt.volerCarte) {
         		for(Joueur o: jeu.joueurs) {
-        			if(o.pseudo==nomJoueur) {
+        			if(o.pseudo.equals(nomJoueur)) {
         				Random rand = new Random();
         				int randindex = rand.nextInt(o.rumeurs.size());
         				Rumeur carteVolee= o.rumeurs.get(randindex);
@@ -255,15 +256,15 @@ public class Joueur {
         		String reponse= screp.next();
         		
         		for(Joueur j: jeu.joueurs) {
-        			if(j.pseudo==nomJoueur) {
+        			if(j.pseudo.equals(nomJoueur)){
         				if(reponse=="O") {
         	    			j.id.revelerIdentite();
-        	    			if(j.id.getPersonnage()=="Villageois") {
+        	    			if(j.id.getPersonnage().equals("Villageois")) {
         	    				this.changerPoints(-1);
         	    				int indexProchain= jeu.joueurs.indexOf(j);
         	    				jeu.indexActif=indexProchain-1;
         	    			}
-        	    			else if (j.id.getPersonnage()=="Witch") {
+        	    			else if (j.id.getPersonnage().equals("Witch")) {
         	    				this.changerPoints(1);
         	    				int indexProchain= jeu.joueurs.indexOf(this);
         	    				jeu.indexActif=indexProchain-1;
@@ -277,12 +278,18 @@ public class Joueur {
         	    			System.out.println("Quelle carte souhaitez-vous défausser?\n Tapez son nom\n");
         	    			Scanner sccarte=new Scanner(System.in);
         	    			String nomDefausse= sccarte.next();
+        	    			
+        	    			Rumeur carteDefausse=null;
         	    			for(Rumeur o:j.rumeurs) {
-        	    				if(o.nom==nomDefausse) {
-        	    					jeu.defausse.defausserCarte(o);
-        	    					j.rumeurs.remove(o);
+        	    				if(o.nom.equals(nomDefausse)) {
+        	    					carteDefausse=o;
+        	    					
         	    				}
         	    			}
+        	    			jeu.defausse.defausserCarte(carteDefausse);
+	    					j.rumeurs.remove(carteDefausse);
+	    					
+	    					
     	    				int indexProchain= jeu.joueurs.indexOf(j);
     	    				jeu.indexActif=indexProchain-1;
         	    			
@@ -296,9 +303,9 @@ public class Joueur {
         	
         	if(carteJouee.hunt.revelerPropreIdentite) {
         		this.id.revelerIdentite();
-        		if(this.id.getPersonnage()=="Villageois") {
+        		if(this.id.getPersonnage().equals("Villageois")) {
         			for(Joueur o: jeu.joueurs) {
-            			if(o.pseudo==nomJoueur) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
+            			if(o.pseudo.equals(nomJoueur)) { 				//PROBLEME: NE CHANGE PAS L'ORDRE DES JOUEURS QUI SUIVRONT
             				jeu.indexActif=jeu.joueurs.indexOf(o)-1;
             			}
             		}
@@ -325,7 +332,7 @@ public class Joueur {
         		String nomDeCarte= scNomCarte.next();
         		for(Joueur j : jeu.joueurs) {
         			for(Rumeur carte: j.cartesJouees)
-        				if(carte.nom==nomDeCarte) {
+        				if(carte.nom.equals(nomDeCarte)) {
         					this.rumeurs.add(carte);
         					j.cartesJouees.remove(carte);
         				}
@@ -336,9 +343,15 @@ public class Joueur {
         	if(carteJouee.hunt.blackCat) {
         		//Piocher carte de défausse
         		Random rand= new Random();
-        		int randindex= rand.nextInt(jeu.defausse.listRumeur.size());
-        		this.rumeurs.add(jeu.defausse.listRumeur.get(randindex));
-        		jeu.defausse.listRumeur.remove(randindex);
+        		if(jeu.defausse.listRumeur.size()!= 0) {
+        			int randindex= rand.nextInt(jeu.defausse.listRumeur.size());
+        			this.rumeurs.add(jeu.defausse.listRumeur.get(randindex));
+            		jeu.defausse.listRumeur.remove(randindex);
+        		}
+        		else {
+        			System.out.println("Pourquoi tu joues cette carte? Il n'y a pas de défausse");
+        		}
+        		
         		
         		//Defausser carte
         		jeu.defausse.defausserCarte(carteJouee);
@@ -348,8 +361,53 @@ public class Joueur {
         		jeu.indexActif=jeu.joueurs.indexOf(this)-1;
         													//PROBLEME:COMMENT ETRE LE PROCHAIN JOUEUR
         	}
+        	
+        	if(carteJouee.witch.faireAccuserAutreJoueur) {
+        		
+        		//Selection de joueur qui devra accuser quelqu'un
+        		jeu.afficherJoueursVivants();
+        		System.out.println("Qui veut tu obliger à accuser?");
+        		Scanner scProchainJoueur= new Scanner(System.in);
+        		String nomProchainJoueur= scProchainJoueur.next();
+        		
+        		//Recherche du joueur qui devra accuser quelqu'un
+        		for(Joueur j : jeu.joueurs) {
+        			if(j.pseudo.equals(nomProchainJoueur)) {
+        				
+        				//Changement de l'ordre
+        				int indexProchain = jeu.joueurs.indexOf(j);
+        				jeu.indexActif= indexProchain;
+        				
+        				//Selection de qui ce joueur veut accuser
+        				jeu.afficherJoueursVivants();
+        				System.out.println(nomProchainJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
+        				Scanner scNomAccuse = new Scanner(System.in);
+        				String nomJoueurAccuse = scNomAccuse.next();
+        				
+        				//Recherche du joueur Selectionne
+        				if(nomJoueurAccuse != this.pseudo) {
+        					for (Joueur player : jeu.joueurs) {
+        						if (player.pseudo.equals(nomJoueurAccuse)) {
+        							
+        							if(player.choisirRevelerIdentite()) {
+        								player.id.revelerIdentite();		
+        							}
+        							else {
+        								player.jouerWitch(player);
+        							}
+        						}
+        					}
+        				}
+        			}
+        		}
+        	}
+        	
+        
+        	
     	}
+    	
     	else System.out.println("carteJouee=null");
+        
     	
     }
 
@@ -374,13 +432,16 @@ public class Joueur {
     	Rumeur carteJouee = null;
     	while(itRum.hasNext()) {
     		Rumeur carte=itRum.next();
-    		if(carte.nom==nomCarte) {
+    		if(carte.nom.equals(nomCarte)) {
     			carteJouee=carte;
-    			this.rumeurs.remove(carteJouee);
-    			this.cartesJouees.add(carteJouee);
+    			
     		}
     			
     	}
+    	this.rumeurs.remove(carteJouee);
+		this.cartesJouees.add(carteJouee);
+		
+		
     	
     	if(carteJouee.witch.faireDefausserCarte) {
     		System.out.println(accusateur.pseudo+"Choisis quelle carte tu veux defausser:\n");
@@ -392,12 +453,14 @@ public class Joueur {
     		Scanner scnomCarteDefausse= new Scanner(System.in);
     		String nomCarteDefausse= scnomCarteDefausse.next();
     		
+    		Rumeur carteDefausse=null;
     		for(Rumeur carte: accusateur.rumeurs) {
-    			if(carte.nom==nomCarteDefausse) {
-    				jeu.defausse.defausserCarte(carte);
-    				accusateur.rumeurs.remove(carte);
+    			if(carte.nom.equals(nomCarteDefausse)) {
+    				carteDefausse=carte;
     			}
     		}
+    		jeu.defausse.defausserCarte(carteDefausse);
+			accusateur.rumeurs.remove(carteDefausse);
     		
     	}
     	
@@ -411,12 +474,16 @@ public class Joueur {
     		Scanner scCarteDefausse= new Scanner(System.in);
     		String nomCarteDefausse= scCarteDefausse.next();
     		
+    		Rumeur carteDefausse = null;
     		for(Rumeur carte: this.rumeurs) {
-    			if(carte.nom==nomCarteDefausse) {
-    				jeu.defausse.defausserCarte(carte);
-    				this.rumeurs.remove(carte);
+    			if(carte.nom.equals(nomCarteDefausse)) {
+    				carteDefausse = carte;
     			}
     		}
+    		
+    		jeu.defausse.defausserCarte(carteDefausse);
+			this.rumeurs.remove(carteDefausse);
+			
     	}
     	
     	if(carteJouee.witch.jouerProchain) {
@@ -429,12 +496,15 @@ public class Joueur {
     		System.out.println("Quelle carte rumeur souhaite tu piocher?");
     		Scanner scCartePiocher= new Scanner(System.in);
     		String nomCartePiocher= scCartePiocher.next();
+    		
+    		Rumeur cartePioche= null;
     		for(Rumeur carte: this.cartesJouees) {
-    			if(carte.nom==nomCartePiocher) {
-    				this.rumeurs.add(carte);
-    				this.cartesJouees.remove(carte);
+    			if(carte.nom.equals(nomCartePiocher)) {
+    				cartePioche= carte;
     			}
     		}
+    		this.rumeurs.add(cartePioche);
+			this.cartesJouees.remove(cartePioche);
     		
     		
     	}
@@ -451,7 +521,7 @@ public class Joueur {
     		Scanner scProchainJoueur= new Scanner(System.in);
     		String nomProchainJoueur= scProchainJoueur.next();
     		for(Joueur j : jeu.joueurs) {
-    			if(j.pseudo==nomProchainJoueur) {
+    			if(j.pseudo.equals(nomProchainJoueur)) {
     				int indexProchain = jeu.joueurs.indexOf(j);
     				jeu.indexActif= indexProchain-1;
     			}
@@ -459,10 +529,49 @@ public class Joueur {
     	}
     	
     	if(carteJouee.witch.faireAccuserAutreJoueur) {
-    														//PROBLEME: COMMENT CREER UN LISTENER DE L'INDEX ?
+    		
+    		//Selection de joueur qui devra accuser quelqu'un
+    		jeu.afficherJoueursVivants();
+    		System.out.println("Qui veut tu obliger à accuser?");
+    		Scanner scProchainJoueur= new Scanner(System.in);
+    		String nomProchainJoueur= scProchainJoueur.next();
+    		
+    		//Recherche du joueur qui devra accuser quelqu'un
+    		for(Joueur j : jeu.joueurs) {
+    			if(j.pseudo.equals(nomProchainJoueur)) {
+    				
+    				//Changement de l'ordre
+    				int indexProchain = jeu.joueurs.indexOf(j);
+    				jeu.indexActif= indexProchain;
+    				
+    				//Selection de qui ce joueur veut accuser
+    				jeu.afficherJoueursVivants();
+    				System.out.println(nomProchainJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
+    				Scanner scNomAccuse = new Scanner(System.in);
+    				String nomJoueurAccuse = scNomAccuse.next();
+    				
+    				//Recherche du joueur Selectionne
+    				if(nomJoueurAccuse != this.pseudo) {
+    					for (Joueur player : jeu.joueurs) {
+    						if (player.pseudo.equals(nomJoueurAccuse)) {
+    							
+    							if(player.choisirRevelerIdentite()) {
+    								player.id.revelerIdentite();		
+    							}
+    							else {
+    								player.jouerWitch(player);
+    							}
+    						}
+    					}
+    				}
+    			}
+    		}
     	}
     	
     }
-    
-   
+    	
 }
+    
+
+
+   

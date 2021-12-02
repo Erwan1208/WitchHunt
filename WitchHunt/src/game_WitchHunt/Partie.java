@@ -117,6 +117,7 @@ public class Partie {
     	
     	
     	this.nbIdentitesRevelees=0;
+    	
     	if(this.round==1) {
     		this.creerCartesRumeurs();
     	}
@@ -124,16 +125,18 @@ public class Partie {
     	int cartesParPersonne=(int) 12/this.joueurs.size();
     	System.out.println("Il y a "+ cartesParPersonne + "cartes par personne" );
     	
-    	//Initiation d'un tableau indiquant si la carte i a été tirée
-    	boolean[] carteTire= new boolean[12];
-    	for(int i=0;i<12;i++) {
-    		carteTire[i]=false;
-    	}
+    	
     	
     	//!!!Possibilité d'utilisé la methode Collections.shuffle()
-    	
+    	for(Joueur j : this.joueurs) {
+    		j.rumeurs.clear();
+    	}
     	
     	Collections.shuffle(this.listRumeurs);
+    	
+    	for(Rumeur r : listRumeurs) {
+    		System.out.println(r.nom);
+    	}
     	
     	for(int numCartes=0;numCartes<(cartesParPersonne*this.nbJoueurs);numCartes++) {
     		
@@ -144,6 +147,17 @@ public class Partie {
     			Joueur player = this.joueurs.get((int)numCartes/cartesParPersonne);
     			player.rumeurs.add(this.listRumeurs.get(numCartes));
     	}
+    	
+    	
+    	
+    	//Verification
+    	for (Joueur j : this.joueurs) {
+    		System.out.println(j.pseudo + " :\n");
+    		for(Rumeur r : j.rumeurs) {
+        		System.out.println(r.nom);
+        	}
+    	}
+    	
     	
     }
 
@@ -181,6 +195,7 @@ public class Partie {
     }
     
     public void finirRound() {
+    	this.round++;
     	System.out.println("Round fini");
     	for(Joueur j :this.joueurs) {
     		if(j.id.isIdRevelee()==false) {

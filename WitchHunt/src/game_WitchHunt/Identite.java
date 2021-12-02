@@ -23,7 +23,7 @@ public class Identite {
     	
     }
     public void revelerIdentite() {
-    	System.out.println(this.personnage);
+    	System.out.println("C'EST UN : " + this.personnage);
     	this.idRevelee=true;
     }
 
