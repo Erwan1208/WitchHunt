@@ -221,7 +221,7 @@ public class Joueur {
         	if (carteJouee.hunt.regarderIdentite) {
         		for(Joueur o: jeu.joueurs) {
         			if(o.pseudo.equals(nomJoueur)) {
-        				o.id.revelerIdentite();	
+        				System.out.println("Shhhhhttttt!!!! C'est un "+ o.id.getPersonnage());
         				jeu.incrementerIdentitesRevelees();//COMMENT FAIRE POUR QUE CE SOIT EN SECRET?
         			}
         		}
