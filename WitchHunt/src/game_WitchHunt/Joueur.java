@@ -109,7 +109,14 @@ public class Joueur {
 			}
 		}
 		else {
-			this.jouerHunt();
+			// si la liste de joueurs restant est différent de 1 il peut jouerHunt sinon on termine le Round
+			if(jeu.joueurs.size() != 1) {	
+				this.jouerHunt();
+			}
+			else {
+				jeu.finirRound();
+			}
+			
 		}
     }
     
