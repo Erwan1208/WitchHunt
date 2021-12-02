@@ -104,8 +104,6 @@ public class Partie {
     	Rumeur petNewt= new Rumeur("petNewt");
     	this.listRumeurs.add(petNewt);
     	
-    	
-    	
     }
 
     public void commencerRound() {
@@ -127,7 +125,7 @@ public class Partie {
     	
     	
     	
-    	//!!!Possibilité d'utilisé la methode Collections.shuffle()
+    	//!!!Possibilité d'utiliser la methode Collections.shuffle()
     	for(Joueur j : this.joueurs) {
     		j.rumeurs.clear();
     	}

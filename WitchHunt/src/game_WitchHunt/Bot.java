@@ -23,24 +23,23 @@ public class Bot extends Joueur {
 	
     public static void JouerDoux(Joueur a) {
     	System.out.println("Le BOT joue facile.");
-    	Partie partie;
-    	Identite identite;
-    	List<Rumeur> rumeurs;
-    	EffetWitch effetwitch;
-    	EffetHunt effetHunt;
+    	//Partie partie;
+    	//Identite identite;
+    	//List<Rumeur> rumeurs;
+    	//EffetWitch effetwitch;
+    	//EffetHunt effetHunt;
     	//jouer(partie,identite,rumeurs,effetwitch,effetHunt);
-    	//jouer(new Doux());
+    	jouerTour(new Doux());
     }
     
     public static void JouerAgressif(Joueur a) {
     	System.out.println("Le BOT joue agressif.");
-    	Partie partie;
-    	Identite identite;
-    	List<Rumeur> rumeurs;
-    	EffetWitch effetwitch;
-    	EffetHunt effetHunt;
-    	//jouer(partie,identite,rumeurs,effetwitch,effetHunt);
-    	//jouer(new Agressif());
+    	//Partie partie;
+    	//Identite identite;
+    	//List<Rumeur> rumeurs;
+    	//EffetWitch effetwitch;
+    	//EffetHunt effetHunt;
+    	jouerTour(new Agressif());
     }
 	
 	
