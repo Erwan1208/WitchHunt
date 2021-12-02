@@ -91,7 +91,7 @@ public class Joueur {
 				Joueur playerSearch=itAcc.next();
 				if(playerSearch.pseudo.equals(nomAccuse)) {
 					System.out.println("Trouvé");
-					//Choix Réponse de l'accusé
+					//Choix Réponse de l'accusé 
 					if(playerSearch.choisirRevelerIdentite()) {
 						playerSearch.id.revelerIdentite();
 						jeu.incrementerIdentitesRevelees();
