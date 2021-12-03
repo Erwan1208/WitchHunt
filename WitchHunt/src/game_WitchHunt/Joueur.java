@@ -82,7 +82,7 @@ public class Joueur {
     public void jouerTour() {
     	
 	    
-	    if(jeu.nbIdentitesRevelees != 1) {	
+	    if(jeu.nbIdentitesRevelees != jeu.getNbJoueurs()-1) {	
 	    
 	    	if(this.decideAccuser()) {
 				//Selection de l'accusé
@@ -378,17 +378,17 @@ public class Joueur {
         													//PROBLEME:COMMENT ETRE LE PROCHAIN JOUEUR
         	}
         	
-        	if(carteJouee.witch.faireAccuserAutreJoueur) {
+        	if(carteJouee.hunt.faireAccuserAutreJoueur) {
         		
         		//Selection de joueur qui devra accuser quelqu'un
         		jeu.afficherJoueursVivants();
-        		System.out.println("Qui veut tu obliger à accuser?");
-        		Scanner scProchainJoueur= new Scanner(System.in);
-        		String nomProchainJoueur= scProchainJoueur.next();
+        		//System.out.println("Qui veut tu obliger à accuser?");
+        		//Scanner scProchainJoueur= new Scanner(System.in);
+        		//String nomProchainJoueur= scProchainJoueur.next();
         		
         		//Recherche du joueur qui devra accuser quelqu'un
         		for(Joueur j : jeu.joueurs) {
-        			if(j.pseudo.equals(nomProchainJoueur)) {
+        			if(j.pseudo.equals(nomJoueur)) {
         				
         				//Changement de l'ordre
         				int indexProchain = jeu.joueurs.indexOf(j);
@@ -396,7 +396,7 @@ public class Joueur {
         				
         				//Selection de qui ce joueur veut accuser
         				jeu.afficherJoueursVivants();
-        				System.out.println(nomProchainJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
+        				System.out.println(nomJoueur+"qui veut tu accuser? Tu ne peux pas accuser "+ this.pseudo);
         				Scanner scNomAccuse = new Scanner(System.in);
         				String nomJoueurAccuse = scNomAccuse.next();
         				
