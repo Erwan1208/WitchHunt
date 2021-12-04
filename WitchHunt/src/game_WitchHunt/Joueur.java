@@ -17,7 +17,7 @@ public class Joueur {
 
     public String pseudo;
 
-
+   
     public List<Rumeur> rumeurs = new ArrayList<Rumeur> ();
     
     public List<Rumeur> cartesJouees = new ArrayList<Rumeur>();
@@ -48,7 +48,6 @@ public class Joueur {
     	System.out.println("Ecrit O pour oui et N pour non\n");
     	Scanner scanner = new Scanner(System.in);
     	String reponse=scanner.next();
-    	System.out.println(reponse.equals("O"));
     	if(reponse.equals("O")) {
     		return true;
     	}
@@ -380,19 +379,15 @@ public class Joueur {
         	
         	if(carteJouee.hunt.faireAccuserAutreJoueur) {
         		
-        		//Selection de joueur qui devra accuser quelqu'un
-        		jeu.afficherJoueursVivants();
-        		//System.out.println("Qui veut tu obliger à accuser?");
-        		//Scanner scProchainJoueur= new Scanner(System.in);
-        		//String nomProchainJoueur= scProchainJoueur.next();
+        		
         		
         		//Recherche du joueur qui devra accuser quelqu'un
         		for(Joueur j : jeu.joueurs) {
         			if(j.pseudo.equals(nomJoueur)) {
         				
         				//Changement de l'ordre
-        				int indexProchain = jeu.joueurs.indexOf(j);
-        				jeu.indexActif= indexProchain;
+        				int indexProchain = (jeu.joueurs.indexOf(j)-1);
+        				jeu.indexActif= indexProchain%jeu.getNbJoueurs();
         				
         				//Selection de qui ce joueur veut accuser
         				jeu.afficherJoueursVivants();

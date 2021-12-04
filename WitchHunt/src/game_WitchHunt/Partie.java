@@ -254,9 +254,12 @@ public class Partie {
         			}
         			
         		}
+    			
+    			
     		}
     		
     		WitchHunt.finirRound();
+    		WitchHunt.afficherPointsJoueurs();
     		
     		
     		
