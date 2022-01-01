@@ -1,4 +1,4 @@
-package game_WitchHunt;
+package Modele;
 
 //import com.modeliosoft.modelio.javadesigner.annotations.objid;
 

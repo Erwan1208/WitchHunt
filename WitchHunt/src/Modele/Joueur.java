@@ -1,14 +1,16 @@
-package game_WitchHunt;
+package Modele;
 
 import java.util.ArrayList;
+
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
 import java.lang.String;
 import java.util.Random;
 
+import java.util.Observable;
 
-public class Joueur {
+public class Joueur extends Observable {
 	
 	public Partie jeu;
 
@@ -21,6 +23,8 @@ public class Joueur {
     public List<Rumeur> rumeurs = new ArrayList<Rumeur> ();
     
     public List<Rumeur> cartesJouees = new ArrayList<Rumeur>();
+    
+    
 
 
     public Identite id;
@@ -417,6 +421,9 @@ public class Joueur {
         
     	} 
     	else System.out.println("carteJouee=null");	
+    	
+    	this.setChanged();
+    	this.notifyObservers();
     }
 
     public void jouerWitch(Joueur accusateur) {
@@ -576,7 +583,10 @@ public class Joueur {
     			}
     		}
     	}
-    	
+    
+    	this.setChanged();
+    	this.notifyObservers();
+    
     }
     	
 }

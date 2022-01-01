@@ -1,4 +1,4 @@
-package game_WitchHunt;
+package Modele;
 
 import java.util.Scanner;
 

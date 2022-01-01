@@ -1,4 +1,4 @@
-package game_WitchHunt;
+package Modele;
 
 
 public class Rumeur {
