@@ -82,6 +82,23 @@ public class Joueur extends Observable {
     	
     	
     }
+    
+    public Joueur accuserJoueur() {
+    	jeu.afficherJoueursVivants();
+		String nomAccuse=this.choisirNomAccuse();
+		
+		//Recherche de l'accusé
+		Iterator<Joueur> itAcc=jeu.joueurs.iterator();
+		while(itAcc.hasNext()) {
+			Joueur playerSearch=itAcc.next();
+			if(playerSearch.pseudo.equals(nomAccuse)) {
+				System.out.println("Trouvé");
+				//Choix Réponse de l'accusé 
+				return playerSearch;
+				
+			}
+		}
+    }
     public void jouerTour() {
     	
 	    
@@ -89,37 +106,27 @@ public class Joueur extends Observable {
 	    
 	    	if(this.decideAccuser()) {
 				//Selection de l'accusé
-				jeu.afficherJoueursVivants();
-				String nomAccuse=this.choisirNomAccuse();
-				
-				//Recherche de l'accusé
-				Iterator<Joueur> itAcc=jeu.joueurs.iterator();
-				while(itAcc.hasNext()) {
-					Joueur playerSearch=itAcc.next();
-					if(playerSearch.pseudo.equals(nomAccuse)) {
-						System.out.println("Trouvé");
-						//Choix Réponse de l'accusé 
-						if(playerSearch.choisirRevelerIdentite()) {
-							playerSearch.id.revelerIdentite();
-							jeu.incrementerIdentitesRevelees();
-							if(playerSearch.id.getPersonnage().equals("Witch")) {
-								this.points++;
-								if(jeu.nbIdentitesRevelees!=jeu.getNbJoueurs()-1) {
-			    					jeu.indexActif--;
-			    				}
-							}
-						}
-						else {
-							playerSearch.jouerWitch(this);
-						}
+				Joueur playerSearch = this.accuserJoueur();
+				if(playerSearch.choisirRevelerIdentite()) {
+					playerSearch.id.revelerIdentite();
+					jeu.incrementerIdentitesRevelees();
+					if(playerSearch.id.getPersonnage().equals("Witch")) {
+						this.points++;
+						if(jeu.nbIdentitesRevelees!=jeu.getNbJoueurs()-1) {
+	    					jeu.indexActif--;
+	    				}
 					}
 				}
+				else {
+					playerSearch.jouerWitch(this);
+				}
 			}
+				
+	}
 	    	else this.jouerHunt();
 			
 	    }
 	    
-	}
     
     
 

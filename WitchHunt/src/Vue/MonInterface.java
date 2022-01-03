@@ -27,20 +27,20 @@ import java.util.*;
 public class MonInterface implements Observer {
 	
 	// Les propriétés de la classe
-	private List<JButton> boutonscartes = new ArrayList<JButton>();
-	private JCheckBox checkBoxEffetHunt;
-	private JCheckBox checkBoxEffetWitch;
-	private JLabel labelPropriete;
-	private JTextArea textPropriete;
-	private JLabel labelEffetHunt;
-	private JTextArea textEffetHunt;
-	private JCheckBox checkEffetHunt;
-	private JLabel labelEffetWitch;
-	private JTextArea textEffetWitch;
-	private JCheckBox checkEffetWitch;
-	private JButton buttonJouer;
-
-    private Partie Partie;
+	public List<JButton> boutonscartes = new ArrayList<JButton>();
+	public JLabel labelPropriete;
+	public JTextArea textPropriete;
+	public JLabel labelEffetHunt;
+	public JTextArea textEffetHunt;
+	public JCheckBox checkEffetHunt;
+	public JLabel labelEffetWitch;
+	public JTextArea textEffetWitch;
+	public JCheckBox checkEffetWitch;
+	public JButton buttonJouer;
+	
+	public JCheckBox checkAccuser;
+	
+	public Partie Partie;
     
     
 	// Le Update est déclenché quand une lampe ou le commutateur change
@@ -145,9 +145,15 @@ public class MonInterface implements Observer {
 		checkEffetHunt.setBounds(80, 40, 10, 10);
 		frame.getContentPane().add(checkEffetHunt);
 		
-		buttonJouer = new JButton("Commutateur");
+		checkAccuser = new JCheckBox("Accuser");
+		checkAccuser.setBounds(40,60, 172, 18);
+		frame.getContentPane().add(checkAccuser);
+		
+		buttonJouer = new JButton("Jouer");
 		buttonJouer.setBounds(147, 105, 172, 18);
 		frame.getContentPane().add(buttonJouer);
+		
+		
 	}
 }
 

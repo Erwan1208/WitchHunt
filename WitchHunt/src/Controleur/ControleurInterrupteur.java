@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import Modele.Interrupteur;
+import Modele.Joueur;
+import Vue.MonInterface;
 
 /**
  * Ce controleur surveille les évènements sur un objet graphique de la classe Button et en fonction de ces evènements, il déclenche des méthodes de l'objet associés de la classe Interrupteur.
@@ -15,19 +17,32 @@ import Modele.Interrupteur;
 public class Controleur {
 	
 	private MonInterface inter;
-	private Joueur j;
+	private Joueur joueur;
 	
 	public Controleur (Joueur j, MonInterface inter){
 		this.inter=inter;
-		this.j=j;
+		this.joueur=j;
 		
 		// L'appui sur le bouton
-		unBouton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				System.out.print("\nControleur de l'interrupteur: activation de "+unInterrupteur);
-				unInterrupteur.appuyer();
+		for(JButton b : inter.boutonscartes ) {
+			b.addActionListener(new ActionListener() {
+				//Afficher les infos de la carte
+			});
+		}
+		
+		inter.buttonJouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(inter.checkEffetHunt.isSelected()) {
+					joueur.jouerHunt();
+				}
+				else if(inter.checkAccuser.isSelected()) {
+					joueur.accuserJoueur();
+				}
 			}
 		});
+		
+		
+		
 	}
 	
 }
