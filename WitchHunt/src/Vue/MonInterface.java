@@ -1,6 +1,5 @@
 package Vue;
 
-
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -11,12 +10,7 @@ import javax.swing.*;
 
 //import com.sun.java.swing.plaf.windows.resources.windows;
 
-import Controleur.ControleurInterrupteur;
-import Modele.Commutateur;
-import Modele.Interrupteur;
-import Modele.Lampe;
-import game_WitchHunt.Joueur;
-import game_WitchHunt.Partie;
+
 
 import java.awt.event.ActionListener;
 import java.util.Observable;
@@ -24,9 +18,11 @@ import java.util.Observer;
 import java.awt.event.ActionEvent;
 import java.util.*;
 
-public class MonInterface implements Observer {
+public class MonInterface implements Observer{
+
+	private JFrame frame;
 	
-	// Les propriétés de la classe
+	
 	public List<JButton> boutonscartes = new ArrayList<JButton>();
 	public JLabel labelPropriete;
 	public JTextArea textPropriete;
@@ -40,120 +36,117 @@ public class MonInterface implements Observer {
 	
 	public JCheckBox checkAccuser;
 	
-	public Partie Partie;
+	//public Partie Partie;
     
-    
-	// Le Update est déclenché quand une lampe ou le commutateur change
-	public void update(Observable instanceObservable, Object arg1){
-		
+	public void update(Observable instanceObservable, Object arg1) {
 		
 	}
-
-	private JFrame frame;
-
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
 		
-		// Construction des objets du Modèle
-		// Création de l'interrupteur qui crée le commutateur qui crée les lampes
-		Partie p = new Partie();
-		
-		// Création du thread qui crée l'interface graphique	
+		//Partie p = new Partie();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MonInterface window = new MonInterface(p);
+					MonInterface window = new MonInterface();
 					window.frame.setVisible(true);
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
 		});
 		
-		// Création de la console - Texte
-		VueTexte maConsoleText = new VueTexte(p); 
+		//VueTexte maConsoleText = new VueTexte(p); 
 	}
 
 	/**
 	 * Create the application.
 	 */
-	public MonInterface(Partie p) {
-
+	public MonInterface() {
 		initialize();
 		
 		//notifie que l'Interface graphique Observe les lampes et le commutateur
-		this.Partie = p;
+		/*this.Partie = p;
 		Joueur[] joueurs = Partie.joueurs;
 		for (int i = 0; i < joueurs.length; i++) {
-		    joueurs[i].addObserver(this);
-		}
+		    joueurs[i].addObserver(this);	
+		    }
 		p.addObserver(this);
 
-		// * Création du Controleur de l'interrupteur: lien entre le Modéle et la Vue
-		new Controleur(joueurs, this);
+				// * Création du Controleur de l'interrupteur: lien entre le Modéle et la Vue
+		new Controleur(joueurs, this);*/
 	}
+
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 600, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		int cartesParJoueurs = (int) 12/Partie.joueurs.size();
-		for(int i=0;i<cartesParJoueurs;i++ ){
-			JButton boutonCarte= new JButton("XXX");
-			boutonCarte.setBounds(10+i*10, 10, 25, 100);
-			frame.getContentPane().add(boutonCarte);
-			this.boutonscartes.add(boutonCarte);
-		}
+		JButton btnNewButton = new JButton("Carte1");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton.setBounds(24, 21, 76, 123);
+		frame.getContentPane().add(btnNewButton);
 		
-		labelPropriete = new JLabel("Propriété");
-		labelPropriete.setBounds(10, 20, 40, 10);
-		frame.getContentPane().add(labelPropriete);
+		JButton btnNewButton_1 = new JButton("Carte2");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnNewButton_1.setBounds(144, 21, 81, 123);
+		frame.getContentPane().add(btnNewButton_1);
 		
-		textPropriete = new JTextArea();
-		textPropriete.setBounds(10, 20, 40, 10);
-		frame.getContentPane().add(textPropriete);
+		JButton btnNewButton_1_1 = new JButton("Carte2");
+		btnNewButton_1_1.setBounds(272, 21, 76, 123);
+		frame.getContentPane().add(btnNewButton_1_1);
 		
-		labelEffetHunt = new JLabel("Effet Hunt");
-		labelEffetHunt.setBounds(10, 30, 40, 10);
-		frame.getContentPane().add(labelEffetHunt);
+		JTextPane textPane = new JTextPane();
+		textPane.setBounds(24, 180, 314, 37);
+		frame.getContentPane().add(textPane);
 		
-		textEffetHunt = new JTextArea("Effet Hunt");
-		textEffetHunt.setBounds(10, 40, 40, 10);
-		frame.getContentPane().add(textEffetHunt);
+		JTextPane textPane_1 = new JTextPane();
+		textPane_1.setBounds(24, 278, 314, 37);
+		frame.getContentPane().add(textPane_1);
 		
-		checkEffetHunt = new JCheckBox("Effet Hunt");
-		checkEffetHunt.setBounds(80, 40, 10, 10);
-		frame.getContentPane().add(checkEffetHunt);
+		JLabel lblNewLabel = new JLabel("Effet Hunt");
+		lblNewLabel.setBounds(24, 155, 81, 14);
+		frame.getContentPane().add(lblNewLabel);
 		
-		labelEffetHunt = new JLabel("Effet Hunt");
-		labelEffetHunt.setBounds(10, 30, 40, 10);
-		frame.getContentPane().add(labelEffetHunt);
+		JLabel lblNewLabel_1 = new JLabel("Effet Witch");
+		lblNewLabel_1.setBounds(24, 253, 81, 14);
+		frame.getContentPane().add(lblNewLabel_1);
 		
-		textEffetHunt = new JTextArea("Effet Hunt");
-		textEffetHunt.setBounds(10, 40, 40, 10);
-		frame.getContentPane().add(textEffetHunt);
+		JButton btnNewButton_2 = new JButton("Jouer Hunt");
+		btnNewButton_2.setBounds(411, 186, 123, 31);
+		frame.getContentPane().add(btnNewButton_2);
 		
-		checkEffetHunt = new JCheckBox("Effet Hunt");
-		checkEffetHunt.setBounds(80, 40, 10, 10);
-		frame.getContentPane().add(checkEffetHunt);
-		
-		checkAccuser = new JCheckBox("Accuser");
-		checkAccuser.setBounds(40,60, 172, 18);
-		frame.getContentPane().add(checkAccuser);
-		
-		buttonJouer = new JButton("Jouer");
-		buttonJouer.setBounds(147, 105, 172, 18);
-		frame.getContentPane().add(buttonJouer);
-		
-		
+		JButton btnNewButton_3 = new JButton("Accuser un Joueur");
+		btnNewButton_3.setBounds(411, 278, 123, 37);
+		frame.getContentPane().add(btnNewButton_3);
 	}
+	
+	
+
+		
+	
+		
 }
+
+
+	
+
+
+
+
+
+
 
