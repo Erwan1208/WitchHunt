@@ -26,20 +26,12 @@ public class Controleur {
 		// L'appui sur le bouton
 		for(JButton b : inter.boutonscartes ) {
 			b.addActionListener(new ActionListener() {
-				//Afficher les infos de la carte
+				public void actionPerformed() {
+					System.out.println("Test");
+				}
 			});
 		}
 		
-		inter.buttonJouer.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(inter.checkEffetHunt.isSelected()) {
-					joueur.jouerHunt();
-				}
-				else if(inter.checkAccuser.isSelected()) {
-					joueur.accuserJoueur();
-				}
-			}
-		});
 		
 		
 		

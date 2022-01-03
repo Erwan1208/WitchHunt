@@ -27,15 +27,18 @@ public class MonInterface implements Observer{
 	
 	
 	public List<JButton> boutonscartes = new ArrayList<JButton>();
-	public JLabel labelPropriete;
-	public JTextArea textPropriete;
+	
 	public JLabel labelEffetHunt;
-	public JTextArea textEffetHunt;
-	public JCheckBox checkEffetHunt;
+	public JTextPane textEffetHunt;
 	public JLabel labelEffetWitch;
-	public JTextArea textEffetWitch;
-	public JCheckBox checkEffetWitch;
-	public JButton buttonJouer;
+	public JTextPane textEffetWitch;
+
+	public JButton btnJouer;
+	public JButton btnEffet;
+	public JButton btnCarte1;
+	public JButton btnCarte2;
+	public JButton btnCarte3;
+	
 	
 	public JCheckBox checkAccuser;
 	
@@ -91,53 +94,60 @@ public class MonInterface implements Observer{
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 600, 300);
+		frame.setBounds(100, 100, 728, 504);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JButton btnNewButton = new JButton("Carte1");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnCarte1 = new JButton("Carte1");
+		btnCarte1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton.setBounds(24, 21, 76, 123);
-		frame.getContentPane().add(btnNewButton);
+		btnCarte1.setBounds(24, 21, 76, 123);
+		frame.getContentPane().add(btnCarte1);
+		boutonscartes.add(btnCarte1);
 		
-		JButton btnNewButton_1 = new JButton("Carte2");
-		btnNewButton_1.addActionListener(new ActionListener() {
+		btnCarte2 = new JButton("Carte2");
+		btnCarte2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnNewButton_1.setBounds(144, 21, 81, 123);
-		frame.getContentPane().add(btnNewButton_1);
+		btnCarte2.setBounds(144, 21, 81, 123);
+		frame.getContentPane().add(btnCarte2);
+		boutonscartes.add(btnCarte2);
 		
-		JButton btnNewButton_1_1 = new JButton("Carte2");
-		btnNewButton_1_1.setBounds(272, 21, 76, 123);
-		frame.getContentPane().add(btnNewButton_1_1);
+		btnCarte3 = new JButton("Carte3");
+		btnCarte3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCarte3.setBounds(272, 21, 76, 123);
+		frame.getContentPane().add(btnCarte3);
+		boutonscartes.add(btnCarte3);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setBounds(24, 180, 314, 37);
-		frame.getContentPane().add(textPane);
+		textEffetHunt = new JTextPane();
+		textEffetHunt.setBounds(24, 180, 314, 37);
+		frame.getContentPane().add(textEffetHunt);
 		
-		JTextPane textPane_1 = new JTextPane();
-		textPane_1.setBounds(24, 278, 314, 37);
-		frame.getContentPane().add(textPane_1);
+		textEffetWitch = new JTextPane();
+		textEffetWitch.setBounds(24, 278, 314, 37);
+		frame.getContentPane().add(textEffetWitch);
 		
-		JLabel lblNewLabel = new JLabel("Effet Hunt");
-		lblNewLabel.setBounds(24, 155, 81, 14);
-		frame.getContentPane().add(lblNewLabel);
+		labelEffetHunt = new JLabel("Effet Hunt");
+		labelEffetHunt.setBounds(24, 155, 81, 14);
+		frame.getContentPane().add(labelEffetHunt);
 		
-		JLabel lblNewLabel_1 = new JLabel("Effet Witch");
-		lblNewLabel_1.setBounds(24, 253, 81, 14);
-		frame.getContentPane().add(lblNewLabel_1);
+		labelEffetWitch = new JLabel("Effet Witch");
+		labelEffetWitch.setBounds(24, 253, 81, 14);
+		frame.getContentPane().add(labelEffetWitch);
 		
-		JButton btnNewButton_2 = new JButton("Jouer Hunt");
-		btnNewButton_2.setBounds(411, 186, 123, 31);
-		frame.getContentPane().add(btnNewButton_2);
+		btnEffet = new JButton("Jouer Hunt");
+		btnEffet.setBounds(411, 186, 123, 31);
+		frame.getContentPane().add(btnEffet);
 		
-		JButton btnNewButton_3 = new JButton("Accuser un Joueur");
-		btnNewButton_3.setBounds(411, 278, 123, 37);
-		frame.getContentPane().add(btnNewButton_3);
+		btnJouer = new JButton("Accuser un Joueur");
+		btnJouer.setBounds(411, 278, 123, 37);
+		frame.getContentPane().add(btnJouer);
 	}
 	
 	
