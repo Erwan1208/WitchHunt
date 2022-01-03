@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import Modele.Interrupteur;
+
 import Modele.Joueur;
 import Vue.MonInterface;
 
@@ -46,3 +46,4 @@ public class Controleur {
 	}
 	
 }
+

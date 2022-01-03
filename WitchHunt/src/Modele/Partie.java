@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.lang.*;
 import java.util.*;
 
-public class Partie {
+public class Partie extends Observable {
    
 	public static int indexActif;
 	
@@ -210,7 +210,7 @@ public class Partie {
     }
 
 
-    private Partie() {
+    public Partie() {
     	this.terminee=false;
     	this.round=1;
     	

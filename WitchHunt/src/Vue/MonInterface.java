@@ -8,6 +8,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.*;
 
+import Modele.Joueur;
+import Modele.Partie;
+import Controleur.Controleur;
 //import com.sun.java.swing.plaf.windows.resources.windows;
 
 
@@ -36,7 +39,7 @@ public class MonInterface implements Observer{
 	
 	public JCheckBox checkAccuser;
 	
-	//public Partie Partie;
+	public Partie Partie;
     
 	public void update(Observable instanceObservable, Object arg1) {
 		
@@ -46,7 +49,7 @@ public class MonInterface implements Observer{
 	 */
 	public static void main(String[] args) {
 		
-		//Partie p = new Partie();
+		Partie p = new Partie();
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -68,15 +71,18 @@ public class MonInterface implements Observer{
 		initialize();
 		
 		//notifie que l'Interface graphique Observe les lampes et le commutateur
-		/*this.Partie = p;
-		Joueur[] joueurs = Partie.joueurs;
-		for (int i = 0; i < joueurs.length; i++) {
-		    joueurs[i].addObserver(this);	
+		Partie p = new Partie();
+		this.Partie = p;
+		List<Joueur> joueurs = Partie.joueurs;
+		for (Joueur j : joueurs) {
+		    j.addObserver(this);	
 		    }
 		p.addObserver(this);
 
 				// * Création du Controleur de l'interrupteur: lien entre le Modéle et la Vue
-		new Controleur(joueurs, this);*/
+		for(Joueur j : joueurs) {
+			new Controleur(j, this);
+		}
 	}
 
 
