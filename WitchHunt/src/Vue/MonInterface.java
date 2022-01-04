@@ -48,6 +48,8 @@ public class MonInterface implements Observer{
 	public void update(Observable instanceObservable, Object arg1) {
 		
 		if(instanceObservable instanceof Joueur && arg1 instanceof Rumeur) {
+			
+			//Effet Hunt
 			textEffetHunt.setText("");
 			
 			if(((Rumeur)arg1).hunt.piocherCarteDefausse) {
@@ -72,7 +74,7 @@ public class MonInterface implements Observer{
 				textEffetHunt.setText(textEffetHunt.getText()+"Choose a player. They must reveal their identity or discard a card from their hand.\n Witch: You gain 1 point.You take next turn;\nVillager: You lose 1 point. They take next turn. \nDiscard: They take next turn. ");
 			}
 			if(((Rumeur)arg1).hunt.revelerPropreIdentite) {
-				textEffetHunt.setText(textEffetHunt.getText()+"Reveal your Identity. \n Witch: Player to your left takes next turn ; \n Villager : you take next turn");
+				textEffetHunt.setText(textEffetHunt.getText()+"Reveal your Identity. \nWitch: Player to your left takes next turn ; \nVillager : you take next turn");
 			}
 			if(((Rumeur)arg1).hunt.faireAccuserAutreJoueur) {
 				textEffetHunt.setText(textEffetHunt.getText()+"On their turn they must accuse a player other than you.");
@@ -82,6 +84,30 @@ public class MonInterface implements Observer{
 			}
 			if(((Rumeur)arg1).hunt.blackCat) {
 				textEffetHunt.setText(textEffetHunt.getText()+"Add one discarded card from your hand and than discard this one. Take next turn.");
+			}
+			
+			//Effet Witch
+			textEffetWitch.setText("");
+			if (((Rumeur)arg1).witch.faireDefausserCarte){
+				textEffetWitch.setText(textEffetWitch.getText()+"The player who accused you discards a random card");
+			}
+			if (((Rumeur)arg1).witch.defausserCarte){
+				textEffetWitch.setText(textEffetWitch.getText()+"Discard a card from your hand");
+			}
+			if (((Rumeur)arg1).witch.jouerProchain){
+				textEffetWitch.setText(textEffetWitch.getText()+"Take next turn");
+			}
+			if (((Rumeur)arg1).witch.piocherPropreCarteRumeur){
+				textEffetWitch.setText(textEffetWitch.getText()+"Take one of your own revealed rumour cards into your hand");
+			}
+			if (((Rumeur)arg1).witch.piocherCarteAcusateur){
+				textEffetWitch.setText(textEffetWitch.getText()+"Take one card from the hand of the player who accused you");
+			}
+			if (((Rumeur)arg1).witch.choisiProchainJoueur){
+				textEffetWitch.setText(textEffetWitch.getText()+"Choose next player");
+			}
+			if (((Rumeur)arg1).witch.faireAccuserAutreJoueur){
+				textEffetWitch.setText(textEffetWitch.getText()+"Choose next player. On their turn they must accuse a player other than you.");
 			}
 		}
 		
