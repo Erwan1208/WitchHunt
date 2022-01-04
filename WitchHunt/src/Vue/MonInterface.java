@@ -24,7 +24,7 @@ import java.util.*;
 
 public class MonInterface implements Observer{
 
-	private JFrame frame;
+	public JFrame frame;
 	
 	
 	public List<JButton> boutonscartes = new ArrayList<JButton>();
@@ -108,6 +108,15 @@ public class MonInterface implements Observer{
 			}
 			if (((Rumeur)arg1).witch.faireAccuserAutreJoueur){
 				textEffetWitch.setText(textEffetWitch.getText()+"Choose next player. On their turn they must accuse a player other than you.");
+			}
+		}
+		
+		if(instanceObservable instanceof Joueur && arg1 instanceof ArrayList) {
+			for(int i=0; i< ((ArrayList)arg1).size();i++) {
+				Rumeur carteI = ((ArrayList<Rumeur>)arg1).get(i);
+				String nomCarteI=carteI.nom;
+				JButton btnassocie =this.boutonscartes.get(i);
+				btnassocie.setText(nomCarteI);
 			}
 		}
 		

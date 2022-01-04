@@ -66,6 +66,12 @@ public class Joueur extends Observable {
     	this.notifyObservers(carte);
     	
     }
+  public void montrerMain() {
+    	
+    	this.setChanged();
+    	this.notifyObservers(this.rumeurs);
+    	
+    }
         
     public String choisirNomAccuse() {
     	System.out.println("Donner le pseudo de la personne que vous voulez accuser!\n");
@@ -107,6 +113,7 @@ public class Joueur extends Observable {
 		}
     }
     public void jouerTour() {
+    	
     	
 	    
 	    if(jeu.nbIdentitesRevelees != jeu.getNbJoueurs()-1) {	
