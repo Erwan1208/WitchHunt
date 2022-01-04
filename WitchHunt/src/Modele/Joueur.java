@@ -62,7 +62,6 @@ public class Joueur extends Observable {
     
     public void afficherCarte(Rumeur carte) {
     	
-    	System.out.println(carte.nom);
     	this.setChanged();
     	this.notifyObservers(carte);
     	
