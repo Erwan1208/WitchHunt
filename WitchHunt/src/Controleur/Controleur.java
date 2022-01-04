@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 
 import Modele.Joueur;
+import Modele.Rumeur;
 import Vue.MonInterface;
 
 /**
@@ -16,26 +17,30 @@ import Vue.MonInterface;
  */
 public class Controleur {
 	
-	private MonInterface inter;
-	private Joueur joueur;
+	public MonInterface inter;
+	public Joueur joueur;
 	
 	public Controleur (Joueur j, MonInterface inter){
 		this.inter=inter;
 		this.joueur=j;
 		
-		// L'appui sur le bouton
-		for(JButton b : inter.boutonscartes ) {
+		for(int i=0; i < inter.boutonscartes.size();i++) {
+			JButton b = inter.boutonscartes.get(i);
+			System.out.println(joueur.rumeurs);
+			Rumeur carteLie = joueur.rumeurs.get(i);
 			b.addActionListener(new ActionListener() {
-				public void actionPerformed() {
-					System.out.println("Test");
+				public void actionPerformed(ActionEvent e) {
+					joueur.afficherCarte(carteLie);
 				}
-			});
+			
+		
+		
+		
+		
+		});
 		}
-		
-		
-		
-		
 	}
-	
 }
+	
+
 

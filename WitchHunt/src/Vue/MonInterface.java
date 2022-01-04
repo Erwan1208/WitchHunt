@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import Modele.Joueur;
 import Modele.Partie;
+import Modele.Rumeur;
 import Controleur.Controleur;
 //import com.sun.java.swing.plaf.windows.resources.windows;
 
@@ -35,16 +36,54 @@ public class MonInterface implements Observer{
 
 	public JButton btnJouer;
 	public JButton btnEffet;
-	public JButton btnCarte1;
+	public JButton btnCarte1; 
 	public JButton btnCarte2;
 	public JButton btnCarte3;
 	
 	
 	public JCheckBox checkAccuser;
 	
-	public Partie Partie;
+	public Partie p;
     
 	public void update(Observable instanceObservable, Object arg1) {
+		
+		if(instanceObservable instanceof Joueur && arg1 instanceof Rumeur) {
+			textEffetHunt.setText("");
+			
+			if(((Rumeur)arg1).hunt.piocherCarteDefausse) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Add one discarded card to your hand, then discard this card");
+			}
+			if(((Rumeur)arg1).hunt.faireRevelerIdentite) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Reveal another player's Identity. Witch: You gain 2 points. You take next turn; Villager: You lose 2 points. They take next turn ");
+			}
+			if(((Rumeur)arg1).hunt.choisiProchainJoueur) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Choose Next Player");
+			}
+			if(((Rumeur)arg1).hunt.regarderIdentite) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Before their turn, secretely look at their identity");
+			}
+			if(((Rumeur)arg1).hunt.piocherPropreCarteRumeur) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Take one of your own revealed Rumor cards into your hand");
+			}
+			if(((Rumeur)arg1).hunt.volerCarte) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Before their turn, take a random card from their hand at add it to your hand");
+			}
+			if(((Rumeur)arg1).hunt.faireRevelerOuDefausser) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Choose a player. They must reveal their identity or discard a card from their hand.\n Witch: You gain 1 point.You take next turn;\nVillager: You lose 1 point. They take next turn. \nDiscard: They take next turn. ");
+			}
+			if(((Rumeur)arg1).hunt.revelerPropreIdentite) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Reveal your Identity. \n Witch: Player to your left takes next turn ; \n Villager : you take next turn");
+			}
+			if(((Rumeur)arg1).hunt.faireAccuserAutreJoueur) {
+				textEffetHunt.setText(textEffetHunt.getText()+"On their turn they must accuse a player other than you.");
+			}
+			if(((Rumeur)arg1).hunt.piocherAutreCarteRumeur) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Take a revelaed Rumour card from any other player");
+			}
+			if(((Rumeur)arg1).hunt.blackCat) {
+				textEffetHunt.setText(textEffetHunt.getText()+"Add one discarded card from your hand and than discard this one. Take next turn.");
+			}
+		}
 		
 	}
 	/**
@@ -52,7 +91,7 @@ public class MonInterface implements Observer{
 	 */
 	public static void main(String[] args) {
 		
-		Partie p = new Partie();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -74,9 +113,7 @@ public class MonInterface implements Observer{
 		initialize();
 		
 		//notifie que l'Interface graphique Observe les lampes et le commutateur
-		Partie p = new Partie();
-		this.Partie = p;
-		List<Joueur> joueurs = Partie.joueurs;
+		List<Joueur> joueurs = p.joueurs;
 		for (Joueur j : joueurs) {
 		    j.addObserver(this);	
 		    }
@@ -93,6 +130,10 @@ public class MonInterface implements Observer{
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		p = new Partie();
+		p.commencerRound();
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 728, 504);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

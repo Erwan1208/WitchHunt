@@ -60,12 +60,12 @@ public class Joueur extends Observable {
     	
     }
     
-    public void afficherCartes() {
-    	for(Rumeur carte : this.rumeurs) {
-    		System.out.println(carte.nom);
-    		this.setChanged();
-    		this.notifyObservers();
-    	}
+    public void afficherCarte(Rumeur carte) {
+    	
+    	System.out.println(carte.nom);
+    	this.setChanged();
+    	this.notifyObservers(carte);
+    	
     }
         
     public String choisirNomAccuse() {
