@@ -42,6 +42,17 @@ public class Controleur {
 		
 		
 		});
+		
+		JButton btnEffet = inter.btnEffet;
+		btnEffet.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				j.jouerHunt();
+				
+			}
+		
+		
+		});
+		
 }
 }
 	

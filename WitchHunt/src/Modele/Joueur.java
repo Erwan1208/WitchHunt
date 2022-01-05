@@ -65,10 +65,15 @@ public class Joueur extends Observable {
     	this.notifyObservers(carte);
     	
     }
-  public void montrerMain() {
+    public void montrerMain() {
     	
     	this.setChanged();
     	this.notifyObservers(this.rumeurs);
+    	
+    }
+    public void pageRepAcusation() {
+    	this.setChanged();
+    	this.notifyObservers("PageAccuse");
     	
     }
         
@@ -87,6 +92,7 @@ public class Joueur extends Observable {
     	String reponse = sc.nextLine();
     	if(reponse.equals("O")) {
     		return true;
+    		
     	
     	}
     	else return false;
@@ -453,7 +459,7 @@ public class Joueur extends Observable {
     	
     	
     	//Afficher et Choisir quelle carte jouee
-    	System.out.println("Quelle carte hunt souhaites-tu jouer?\n");
+    	System.out.println("Quelle carte witch souhaites-tu jouer?\n");
     	Iterator<Rumeur> ithunt = this.rumeurs.iterator();
     	while (ithunt.hasNext()) {
     		System.out.println(ithunt.next().nom);

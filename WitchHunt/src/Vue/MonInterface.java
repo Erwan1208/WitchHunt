@@ -125,6 +125,60 @@ public class MonInterface implements Observer{
 				JButton btnassocie =this.boutonscartes.get(i);
 				btnassocie.setText(nomCarteI);
 			}
+			
+			//Reveler identite
+			this.btnJouer.setText("Accuser un joueur");
+			ActionListener[] listActions1 = btnJouer.getActionListeners();
+			for(ActionListener a : listActions1) {
+				btnJouer.removeActionListener(a);
+			}
+			btnJouer.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					p.afficherJoueursVivants();
+				}
+			});
+			
+			this.btnEffet.setText("Jouer Hunt");
+			ActionListener[] listActions2 = btnJouer.getActionListeners();
+			for(ActionListener a : listActions2) {
+				btnEffet.removeActionListener(a);
+			}
+			btnEffet.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					((Joueur)instanceObservable).jouerHunt();; //A developper
+				}
+			});
+			
+		}
+		
+		if(instanceObservable instanceof Joueur && arg1 instanceof String) {
+			if(arg1.equals("PageAccuse")) {
+				
+				//Reveler identite
+				this.btnJouer.setText("Reveler Identite");
+				ActionListener[] listActions1 = btnJouer.getActionListeners();
+				for(ActionListener a : listActions1) {
+					btnJouer.removeActionListener(a);
+				}
+				btnJouer.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						((Joueur)instanceObservable).id.revelerIdentite(); //A developper
+					}
+				});
+				
+				//Jouer Witch
+				this.btnEffet.setText("Jouer Witch");
+				ActionListener[] listActions2 = btnJouer.getActionListeners();
+				for(ActionListener a : listActions2) {
+					btnEffet.removeActionListener(a);
+				}
+				btnEffet.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						((Joueur)instanceObservable).jouerWitch(null);; //A developper
+					}
+				});
+				
+			}
 		}
 		
 		
@@ -145,6 +199,7 @@ public class MonInterface implements Observer{
 								frame.repaint();
 								initialize();
 								j.montrerMain();
+								j.pageRepAcusation();
 							}
 						});	
 						btnJoueur.setBounds(50, y, 600, 75);
@@ -153,7 +208,9 @@ public class MonInterface implements Observer{
 					y=y+100;
 				}
 			}
+			
 		}
+		
 		
 	}
 	/**
