@@ -1,6 +1,7 @@
 package Controleur;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.awt.event.*;
 
@@ -32,14 +33,10 @@ public class Controleur {
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					joueur.afficherCarte(carteLie);
-				}
-			
-		
-		
-		
-		
-		});
+				}});
 		}
+		
+		
 		
 		JFrame frame = inter.frame;
 		
@@ -50,8 +47,33 @@ public class Controleur {
 			public void windowClosing(WindowEvent e) {
 				frame.dispose();
 			}
+			public void windowActivated(WindowEvent e) {
+				
+			}
+			public void windowDeactivated(WindowEvent e) {
+				
+			}
+			public void windowIconified(WindowEvent e) {
+				
+			}
+			public void windowDeiconified(WindowEvent e) {
+				
+			}
+			public void windowClosed(WindowEvent e) {
+				
+			}
 		});
-	}
+		
+		JButton btnJouer = inter.btnJouer;
+		btnJouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				inter.p.afficherJoueursVivants();
+				
+			}
+		
+		
+		});
+}
 }
 	
 

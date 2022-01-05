@@ -176,6 +176,8 @@ public class Partie extends Observable {
     			System.out.println(o.pseudo);
     		}
 		}
+    	this.setChanged();
+    	this.notifyObservers("AccuserJoueur");
     }
 
 
@@ -227,7 +229,6 @@ public class Partie extends Observable {
     	}
     	
     }
-    
       
       
     public static void main(String[] args) {

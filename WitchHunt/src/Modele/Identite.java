@@ -28,24 +28,24 @@ public class Identite {
     }
 
    
-    void setPersonnage(String value) {
+    public void setPersonnage(String value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.personnage = value;
     }
 
    
-    boolean isIdRevelee() {
+    public boolean isIdRevelee() {
         // Automatically generated method. Please delete this comment before entering specific code.
         return this.idRevelee;
     }
 
 
-    void setIdRevelee(boolean value) {
+    public void setIdRevelee(boolean value) {
         // Automatically generated method. Please delete this comment before entering specific code.
         this.idRevelee = value;
     }
     
-    String getPersonnage() {
+    public String getPersonnage() {
     	return this.personnage;
     }
     

@@ -39,6 +39,10 @@ public class MonInterface implements Observer{
 	public JButton btnCarte1; 
 	public JButton btnCarte2;
 	public JButton btnCarte3;
+	public JButton btnCarte4; 
+	public JButton btnCarte5;
+	public JButton btnCarte6;
+	
 	
 	
 	public JCheckBox checkAccuser;
@@ -117,6 +121,30 @@ public class MonInterface implements Observer{
 				String nomCarteI=carteI.nom;
 				JButton btnassocie =this.boutonscartes.get(i);
 				btnassocie.setText(nomCarteI);
+			}
+		}
+		
+		
+		if(instanceObservable instanceof Partie && arg1 instanceof String) {
+			if(arg1.equals("AccuserJoueur")) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				int y=25;
+				for(int i=0;i<p.joueurs.size();i++) {
+					Joueur j = p.joueurs.get(i);
+					if(j.id.isIdRevelee()==false) {
+						JButton btnJoueur = new JButton(j.pseudo);
+						btnJoueur.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								//accuserJoueur
+							}
+						});	
+						btnJoueur.setBounds(50, y, 600, 75);
+						frame.getContentPane().add(btnJoueur);
+					}
+					System.out.println(y);
+					y=y+100;
+				}
 			}
 		}
 		
@@ -200,6 +228,23 @@ public class MonInterface implements Observer{
 		btnCarte3.setBounds(272, 21, 76, 123);
 		frame.getContentPane().add(btnCarte3);
 		boutonscartes.add(btnCarte3);
+		
+		
+		btnCarte4 = new JButton("Carte4");
+		btnCarte4.setBounds(400, 21, 76, 123);
+		frame.getContentPane().add(btnCarte4);
+		boutonscartes.add(btnCarte4);
+		
+		btnCarte5 = new JButton("Carte5");
+		btnCarte5.setBounds(520, 21, 76, 123);
+		frame.getContentPane().add(btnCarte5);
+		boutonscartes.add(btnCarte5);
+		
+		btnCarte6 = new JButton("Carte6");
+		btnCarte6.setBounds(640, 21, 76, 123);
+		frame.getContentPane().add(btnCarte6);
+		boutonscartes.add(btnCarte6);
+		
 		
 		textEffetHunt = new JTextPane();
 		textEffetHunt.setBounds(24, 180, 314, 37);

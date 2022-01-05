@@ -39,7 +39,6 @@ public class Joueur extends Observable {
     }
 
     void setPseudo(String value) {
-        // Automatically generated method. Please delete this comment before entering specific code.
         this.pseudo = value;
     }
     
@@ -120,6 +119,7 @@ public class Joueur extends Observable {
 	    
 	    	if(this.decideAccuser()) {
 				//Selection de l'accusé
+	    		
 				Joueur playerSearch = this.accuserJoueur();
 				if(playerSearch.choisirRevelerIdentite()) {
 					playerSearch.id.revelerIdentite();
