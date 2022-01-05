@@ -191,9 +191,6 @@ public class Partie extends Observable {
         return instance;
     }
     
-    public void accuserJoueur() {
-    }
-    
     public void finirRound() {
     	this.round++;
     	System.out.println("Round fini");

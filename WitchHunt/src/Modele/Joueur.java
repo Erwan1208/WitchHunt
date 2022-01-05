@@ -95,6 +95,7 @@ public class Joueur extends Observable {
     	
     }
     
+    
     public Joueur accuserJoueur() {
     	jeu.afficherJoueursVivants();
 		String nomAccuse=this.choisirNomAccuse();

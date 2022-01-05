@@ -2,6 +2,7 @@ package Vue;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JCheckBox;
 import javax.swing.JButton;
@@ -24,10 +25,10 @@ import java.util.*;
 
 public class MonInterface implements Observer{
 
-	public JFrame frame;
+	public JFrame frame = new JFrame();
 	
 	
-	public List<JButton> boutonscartes = new ArrayList<JButton>();
+	public List<JButton> boutonscartes;
 	
 	public JLabel labelEffetHunt;
 	public JTextPane textEffetHunt;
@@ -54,6 +55,7 @@ public class MonInterface implements Observer{
 		if(instanceObservable instanceof Joueur && arg1 instanceof Rumeur) {
 			
 			//Effet Hunt
+			
 			textEffetHunt.setText("");
 			
 			if(((Rumeur)arg1).hunt.piocherCarteDefausse) {
@@ -116,6 +118,7 @@ public class MonInterface implements Observer{
 		}
 		
 		if(instanceObservable instanceof Joueur && arg1 instanceof ArrayList) {
+			
 			for(int i=0; i< ((ArrayList)arg1).size();i++) {
 				Rumeur carteI = ((ArrayList<Rumeur>)arg1).get(i);
 				String nomCarteI=carteI.nom;
@@ -129,6 +132,7 @@ public class MonInterface implements Observer{
 			if(arg1.equals("AccuserJoueur")) {
 				frame.getContentPane().removeAll();
 				frame.repaint();
+				frame.validate();
 				int y=25;
 				for(int i=0;i<p.joueurs.size();i++) {
 					Joueur j = p.joueurs.get(i);
@@ -136,13 +140,16 @@ public class MonInterface implements Observer{
 						JButton btnJoueur = new JButton(j.pseudo);
 						btnJoueur.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								//accuserJoueur
+								frame.getContentPane().removeAll();
+								frame.revalidate();
+								frame.repaint();
+								initialize();
+								j.montrerMain();
 							}
 						});	
 						btnJoueur.setBounds(50, y, 600, 75);
 						frame.getContentPane().add(btnJoueur);
 					}
-					System.out.println(y);
 					y=y+100;
 				}
 			}
@@ -173,6 +180,9 @@ public class MonInterface implements Observer{
 	 * Create the application.
 	 */
 	public MonInterface() {
+		
+		p = new Partie();
+		p.commencerRound();
 		initialize();
 		
 		//notifie que l'Interface graphique Observe les lampes et le commutateur
@@ -183,21 +193,18 @@ public class MonInterface implements Observer{
 		p.addObserver(this);
 
 				// * Création du Controleur de l'interrupteur: lien entre le Modéle et la Vue
-		for(Joueur j : joueurs) {
-			new Controleur(j, this);
-		}
+		joueurs.get(0).montrerMain();
+		
 	}
 
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	public void initialize() {
 		
-		p = new Partie();
-		p.commencerRound();
+		boutonscartes= new ArrayList<JButton>();
 		
-		frame = new JFrame();
 		frame.setBounds(100, 100, 728, 504);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -269,6 +276,11 @@ public class MonInterface implements Observer{
 		btnJouer = new JButton("Accuser un Joueur");
 		btnJouer.setBounds(411, 278, 123, 37);
 		frame.getContentPane().add(btnJouer);
+		
+		
+		for(Joueur j : this.p.joueurs) {
+			new Controleur(j, this);
+		}
 	}
 	
 	

@@ -13,11 +13,7 @@ import Modele.Joueur;
 import Modele.Rumeur;
 import Vue.MonInterface;
 
-/**
- * Ce controleur surveille les évènements sur un objet graphique de la classe Button et en fonction de ces evènements, il déclenche des méthodes de l'objet associés de la classe Interrupteur.
- * @author nigro
- *
- */
+
 public class Controleur {
 	
 	public MonInterface inter;
@@ -36,33 +32,6 @@ public class Controleur {
 				}});
 		}
 		
-		
-		
-		JFrame frame = inter.frame;
-		
-		frame.addWindowListener(new WindowListener() {
-			public void windowOpened(WindowEvent e) {
-				joueur.montrerMain();
-			}
-			public void windowClosing(WindowEvent e) {
-				frame.dispose();
-			}
-			public void windowActivated(WindowEvent e) {
-				
-			}
-			public void windowDeactivated(WindowEvent e) {
-				
-			}
-			public void windowIconified(WindowEvent e) {
-				
-			}
-			public void windowDeiconified(WindowEvent e) {
-				
-			}
-			public void windowClosed(WindowEvent e) {
-				
-			}
-		});
 		
 		JButton btnJouer = inter.btnJouer;
 		btnJouer.addActionListener(new ActionListener() {
