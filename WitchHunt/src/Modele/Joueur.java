@@ -112,12 +112,11 @@ public class Joueur extends Observable {
 			Joueur playerSearch=itAcc.next();
 			if(playerSearch.pseudo.equals(nomAccuse)) {
 				System.out.println("Trouvé");
-				//Choix Réponse de l'accusé 
 				return playerSearch;
-				
 			}
-			else return null;
+			
 		}
+		return null;
     }
     public void jouerTour() {
     	

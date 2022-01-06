@@ -238,7 +238,7 @@ public class Partie extends Observable {
       
       
     public static void main(String[] args) {
-    	/*Partie WitchHunt = new Partie();
+    	Partie WitchHunt = new Partie();
     
     	while(WitchHunt.terminee==false) {
     		
@@ -283,7 +283,7 @@ public class Partie extends Observable {
     		
     	}
     	
-    */	
+    	
     }
     
     
