@@ -36,22 +36,23 @@ public class Controleur {
 		JButton btnJouer = inter.btnJouer;
 		btnJouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				inter.p.afficherJoueursVivants();
+				inter.p.afficherJoueursVivants("AccuserJoueur");
 				
 			}
 		
 		
 		});
 		
-		JButton btnEffet = inter.btnEffet;
+		/*JButton btnEffet = inter.btnEffet;
 		btnEffet.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				j.jouerHunt();
+				inter.p.afficherJoueursVivants("AccuserJoueur");
+				System.out.println("Controleur");
 				
 			}
 		
 		
-		});
+		});*/
 		
 }
 }

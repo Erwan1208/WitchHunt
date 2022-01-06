@@ -27,6 +27,8 @@ public class MonInterface implements Observer{
 
 	public JFrame frame = new JFrame();
 	
+	public Joueur accusateur;
+	public Joueur accusé;
 	
 	public List<JButton> boutonscartes;
 	
@@ -134,7 +136,8 @@ public class MonInterface implements Observer{
 			}
 			btnJouer.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					p.afficherJoueursVivants();
+					p.afficherJoueursVivants("AccuserJoueur");
+					accusateur= (Joueur)instanceObservable;
 				}
 			});
 			
@@ -145,7 +148,18 @@ public class MonInterface implements Observer{
 			}
 			btnEffet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					((Joueur)instanceObservable).jouerHunt();; //A developper
+					for(JButton b : boutonscartes) {
+						if(b.isSelected()){
+							Rumeur rumeurJoue=null;
+							for(Rumeur rumeur : ((Joueur)instanceObservable).rumeurs) {
+								if(rumeur.nom.equals(b.getText())) {
+									rumeurJoue = rumeur;
+								}
+							}
+							((Joueur)instanceObservable).jouerHunt(rumeurJoue,accusateur.pseudo);; 
+						}
+					}
+					
 				}
 			});
 			
@@ -154,10 +168,10 @@ public class MonInterface implements Observer{
 		if(instanceObservable instanceof Joueur && arg1 instanceof String) {
 			if(arg1.equals("PageAccuse")) {
 				
+				System.out.println("PageRepAccuse");
 				//Reveler identite
 				this.btnJouer.setText("Reveler Identite");
-				ActionListener[] listActions1 = btnJouer.getActionListeners();
-				for(ActionListener a : listActions1) {
+				for(ActionListener a : btnJouer.getActionListeners()) {
 					btnJouer.removeActionListener(a);
 				}
 				btnJouer.addActionListener(new ActionListener() {
@@ -168,13 +182,14 @@ public class MonInterface implements Observer{
 				
 				//Jouer Witch
 				this.btnEffet.setText("Jouer Witch");
-				ActionListener[] listActions2 = btnJouer.getActionListeners();
-				for(ActionListener a : listActions2) {
+				for(ActionListener a : btnJouer.getActionListeners()) {
 					btnEffet.removeActionListener(a);
 				}
 				btnEffet.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						((Joueur)instanceObservable).jouerWitch(null);; //A developper
+						p.afficherJoueursVivants("WitchAccusation"); //pageWitchAccusation
+						
+						
 					}
 				});
 				
@@ -183,10 +198,12 @@ public class MonInterface implements Observer{
 		
 		
 		if(instanceObservable instanceof Partie && arg1 instanceof String) {
+			System.out.println(arg1);
 			if(arg1.equals("AccuserJoueur")) {
+				
 				frame.getContentPane().removeAll();
 				frame.repaint();
-				frame.validate();
+				frame.revalidate();
 				int y=25;
 				for(int i=0;i<p.joueurs.size();i++) {
 					Joueur j = p.joueurs.get(i);
@@ -200,6 +217,37 @@ public class MonInterface implements Observer{
 								initialize();
 								j.montrerMain();
 								j.pageRepAcusation();
+								accusé = j;
+							}
+						});	
+						btnJoueur.setBounds(50, y, 600, 75);
+						frame.getContentPane().add(btnJoueur);
+					}
+					y=y+100;
+				}
+			}
+			if(arg1.equals("WitchAccusation")) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				frame.revalidate();
+				int y=25;
+				for(int i=0;i<p.joueurs.size();i++) {
+					Joueur j = p.joueurs.get(i);
+					if(j.id.isIdRevelee()==false) {
+						JButton btnJoueur = new JButton(j.pseudo);
+						btnJoueur.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
+								//j.jouerWitch(accusateur);
+								System.out.println("Reinitialisation");
+								frame.getContentPane().removeAll();
+								frame.revalidate();
+								frame.repaint();
+								initialize();
+								j.montrerMain();
+								accusateur = null;
+								accusé = null;
+							
+								
 							}
 						});	
 						btnJoueur.setBounds(50, y, 600, 75);

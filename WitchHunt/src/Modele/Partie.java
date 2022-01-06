@@ -170,6 +170,16 @@ public class Partie extends Observable {
     	
     }
     
+    public void afficherJoueursVivants(String typeAccusation) {
+    	for(Joueur o: this.joueurs) {
+    		if(o.id.isIdRevelee()==false || o.id.getPersonnage().equals("Villageois")) {
+    			System.out.println(o.pseudo);
+    		}
+		}
+    	this.setChanged();
+    	this.notifyObservers(typeAccusation);
+    }
+    
     public void afficherJoueursVivants() {
     	for(Joueur o: this.joueurs) {
     		if(o.id.isIdRevelee()==false || o.id.getPersonnage().equals("Villageois")) {
@@ -177,9 +187,8 @@ public class Partie extends Observable {
     		}
 		}
     	this.setChanged();
-    	this.notifyObservers("AccuserJoueur");
+    	this.notifyObservers();
     }
-
 
    
     public static Partie getInstance() {
