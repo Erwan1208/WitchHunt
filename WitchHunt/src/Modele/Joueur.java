@@ -458,7 +458,6 @@ public class Joueur extends Observable {
 public void jouerHunt(Rumeur nomCarte, String nomJoueur) {
     	
     	
-    	
     	System.out.println("Jouer Hunt");
 
     	

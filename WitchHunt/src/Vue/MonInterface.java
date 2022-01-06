@@ -30,9 +30,9 @@ public class MonInterface implements Observer{
 	public Joueur accusateur;
 	public Joueur accusé;
 	
-	public Rumeur carteJouee;
+	public static Rumeur carteJouee;
 	
-	public List<JButton> boutonscartes;
+	public List<JToggleButton> boutonscartes;
 	
 	public JLabel labelEffetHunt;
 	public JTextPane textEffetHunt;
@@ -41,12 +41,12 @@ public class MonInterface implements Observer{
 
 	public JButton btnJouer;
 	public JButton btnEffet;
-	public JButton btnCarte1; 
-	public JButton btnCarte2;
-	public JButton btnCarte3;
-	public JButton btnCarte4; 
-	public JButton btnCarte5;
-	public JButton btnCarte6;
+	public JToggleButton btnCarte1; 
+	public JToggleButton btnCarte2;
+	public JToggleButton btnCarte3;
+	public JToggleButton btnCarte4; 
+	public JToggleButton btnCarte5;
+	public JToggleButton btnCarte6;
 	
 	
 	
@@ -126,7 +126,7 @@ public class MonInterface implements Observer{
 			for(int i=0; i< ((ArrayList)arg1).size();i++) {
 				Rumeur carteI = ((ArrayList<Rumeur>)arg1).get(i);
 				String nomCarteI=carteI.nom;
-				JButton btnassocie =this.boutonscartes.get(i);
+				JToggleButton btnassocie =this.boutonscartes.get(i);
 				btnassocie.setText(nomCarteI);
 			}
 			
@@ -152,12 +152,14 @@ public class MonInterface implements Observer{
 				public void actionPerformed(ActionEvent e) {
 					accusateur= (Joueur)instanceObservable;
 					p.afficherJoueursVivants("HuntAccusation");
-					for(JButton b : boutonscartes) {
+					for(JToggleButton b : boutonscartes) {
+						
 						if(b.isSelected()){
-							Rumeur carteJouee=null;
+							MonInterface.carteJouee=null;
 							for(Rumeur rumeur : ((Joueur)instanceObservable).rumeurs) {
 								if(rumeur.nom.equals(b.getText())) {
-									carteJouee = rumeur;
+									MonInterface.carteJouee = rumeur;
+									System.out.println(carteJouee.nom);
 								}
 							}
 							
@@ -187,6 +189,7 @@ public class MonInterface implements Observer{
 				
 				//Jouer Witch
 				this.btnEffet.setText("Jouer Witch");
+				
 				for(ActionListener a : btnEffet.getActionListeners()) {
 					btnEffet.removeActionListener(a);
 				}
@@ -342,13 +345,13 @@ public class MonInterface implements Observer{
 	 */
 	public void initialize() {
 		
-		boutonscartes= new ArrayList<JButton>();
+		boutonscartes= new ArrayList<JToggleButton>();
 		
 		frame.setBounds(100, 100, 728, 504);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		btnCarte1 = new JButton("Carte1");
+		btnCarte1 = new JToggleButton("Carte1");
 		btnCarte1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -357,7 +360,7 @@ public class MonInterface implements Observer{
 		frame.getContentPane().add(btnCarte1);
 		boutonscartes.add(btnCarte1);
 		
-		btnCarte2 = new JButton("Carte2");
+		btnCarte2 = new JToggleButton("Carte2");
 		btnCarte2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -366,7 +369,7 @@ public class MonInterface implements Observer{
 		frame.getContentPane().add(btnCarte2);
 		boutonscartes.add(btnCarte2);
 		
-		btnCarte3 = new JButton("Carte3");
+		btnCarte3 = new JToggleButton("Carte3");
 		btnCarte3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -376,17 +379,17 @@ public class MonInterface implements Observer{
 		boutonscartes.add(btnCarte3);
 		
 		
-		btnCarte4 = new JButton("Carte4");
+		btnCarte4 = new JToggleButton("Carte4");
 		btnCarte4.setBounds(400, 21, 76, 123);
 		frame.getContentPane().add(btnCarte4);
 		boutonscartes.add(btnCarte4);
 		
-		btnCarte5 = new JButton("Carte5");
+		btnCarte5 = new JToggleButton("Carte5");
 		btnCarte5.setBounds(520, 21, 76, 123);
 		frame.getContentPane().add(btnCarte5);
 		boutonscartes.add(btnCarte5);
 		
-		btnCarte6 = new JButton("Carte6");
+		btnCarte6 = new JToggleButton("Carte6");
 		btnCarte6.setBounds(640, 21, 76, 123);
 		frame.getContentPane().add(btnCarte6);
 		boutonscartes.add(btnCarte6);

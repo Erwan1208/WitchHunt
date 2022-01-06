@@ -24,7 +24,7 @@ public class Controleur {
 		this.joueur=j;
 		
 		for(int i=0; i < inter.boutonscartes.size();i++) {
-			JButton b = inter.boutonscartes.get(i);
+			JToggleButton b = inter.boutonscartes.get(i);
 			Rumeur carteLie = joueur.rumeurs.get(i);
 			b.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
