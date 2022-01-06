@@ -17,10 +17,10 @@ public class Partie extends Observable {
     private int round;
 
 
-    private boolean terminee;
+    public boolean terminee;
 
 
-    private int nbJoueurs;
+    public int nbJoueurs;
 
  
     public int nbIdentitesRevelees;

@@ -30,6 +30,8 @@ public class MonInterface implements Observer{
 	public Joueur accusateur;
 	public Joueur accusé;
 	
+	public Rumeur carteJoue;
+	
 	public List<JButton> boutonscartes;
 	
 	public JLabel labelEffetHunt;
@@ -148,15 +150,17 @@ public class MonInterface implements Observer{
 			}
 			btnEffet.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
+					accusateur= (Joueur)instanceObservable;
+					p.afficherJoueursVivants("HuntAccusation");
 					for(JButton b : boutonscartes) {
 						if(b.isSelected()){
-							Rumeur rumeurJoue=null;
+							Rumeur carteJoue=null;
 							for(Rumeur rumeur : ((Joueur)instanceObservable).rumeurs) {
 								if(rumeur.nom.equals(b.getText())) {
-									rumeurJoue = rumeur;
+									carteJoue = rumeur;
 								}
 							}
-							((Joueur)instanceObservable).jouerHunt(rumeurJoue,accusateur.pseudo);; 
+							
 						}
 					}
 					
@@ -237,15 +241,43 @@ public class MonInterface implements Observer{
 						JButton btnJoueur = new JButton(j.pseudo);
 						btnJoueur.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								//j.jouerWitch(accusateur);
+								accusé.jouerWitch(accusateur);
+								frame.getContentPane().removeAll();
+								frame.revalidate();
+								frame.repaint();
+								initialize();
+								accusé.montrerMain();
+								accusateur = null;
+								accusé = null;
+							
+								
+							}
+						});	
+						btnJoueur.setBounds(50, y, 600, 75);
+						frame.getContentPane().add(btnJoueur);
+					}
+					y=y+100;
+				}
+			}
+			if(arg1.equals("HuntAccusation")) {
+				frame.getContentPane().removeAll();
+				frame.repaint();
+				frame.revalidate();
+				int y=25;
+				for(int i=0;i<p.joueurs.size();i++) {
+					Joueur j = p.joueurs.get(i);
+					if(j.id.isIdRevelee()==false) {
+						JButton btnJoueur = new JButton(j.pseudo);
+						btnJoueur.addActionListener(new ActionListener() {
+							public void actionPerformed(ActionEvent e) {
 								System.out.println("Reinitialisation");
 								frame.getContentPane().removeAll();
 								frame.revalidate();
 								frame.repaint();
 								initialize();
 								j.montrerMain();
-								accusateur = null;
-								accusé = null;
+								accusateur.jouerHunt(carteJoue, j.pseudo);
+								accusateur=null;
 							
 								
 							}
