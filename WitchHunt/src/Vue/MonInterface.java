@@ -30,7 +30,7 @@ public class MonInterface implements Observer{
 	public Joueur accusateur;
 	public Joueur accusé;
 	
-	public Rumeur carteJoue;
+	public Rumeur carteJouee;
 	
 	public List<JButton> boutonscartes;
 	
@@ -52,7 +52,7 @@ public class MonInterface implements Observer{
 	
 	public JCheckBox checkAccuser;
 	
-	public Partie p;
+	public static Partie p;
     
 	public void update(Observable instanceObservable, Object arg1) {
 		
@@ -144,7 +144,7 @@ public class MonInterface implements Observer{
 			});
 			
 			this.btnEffet.setText("Jouer Hunt");
-			ActionListener[] listActions2 = btnJouer.getActionListeners();
+			ActionListener[] listActions2 = btnEffet.getActionListeners();
 			for(ActionListener a : listActions2) {
 				btnEffet.removeActionListener(a);
 			}
@@ -154,12 +154,13 @@ public class MonInterface implements Observer{
 					p.afficherJoueursVivants("HuntAccusation");
 					for(JButton b : boutonscartes) {
 						if(b.isSelected()){
-							Rumeur carteJoue=null;
+							Rumeur carteJouee=null;
 							for(Rumeur rumeur : ((Joueur)instanceObservable).rumeurs) {
 								if(rumeur.nom.equals(b.getText())) {
-									carteJoue = rumeur;
+									carteJouee = rumeur;
 								}
 							}
+							
 							
 						}
 					}
@@ -186,7 +187,7 @@ public class MonInterface implements Observer{
 				
 				//Jouer Witch
 				this.btnEffet.setText("Jouer Witch");
-				for(ActionListener a : btnJouer.getActionListeners()) {
+				for(ActionListener a : btnEffet.getActionListeners()) {
 					btnEffet.removeActionListener(a);
 				}
 				btnEffet.addActionListener(new ActionListener() {
@@ -241,7 +242,8 @@ public class MonInterface implements Observer{
 						JButton btnJoueur = new JButton(j.pseudo);
 						btnJoueur.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								accusé.jouerWitch(accusateur);
+								System.out.println("JouerWitch");
+								accusé.jouerWitch(carteJouee,accusateur);
 								frame.getContentPane().removeAll();
 								frame.revalidate();
 								frame.repaint();
@@ -249,6 +251,7 @@ public class MonInterface implements Observer{
 								accusé.montrerMain();
 								accusateur = null;
 								accusé = null;
+								
 							
 								
 							}
@@ -270,13 +273,12 @@ public class MonInterface implements Observer{
 						JButton btnJoueur = new JButton(j.pseudo);
 						btnJoueur.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
-								System.out.println("Reinitialisation");
 								frame.getContentPane().removeAll();
 								frame.revalidate();
 								frame.repaint();
 								initialize();
 								j.montrerMain();
-								accusateur.jouerHunt(carteJoue, j.pseudo);
+								accusateur.jouerHunt(carteJouee, j.pseudo);
 								accusateur=null;
 							
 								
@@ -310,7 +312,7 @@ public class MonInterface implements Observer{
 			}
 		});
 		
-		//VueTexte maConsoleText = new VueTexte(p); 
+		VueTexte maConsoleText = new VueTexte(p); 
 	}
 
 	/**
@@ -318,7 +320,7 @@ public class MonInterface implements Observer{
 	 */
 	public MonInterface() {
 		
-		p = new Partie();
+		this.p = new Partie();
 		p.commencerRound();
 		initialize();
 		

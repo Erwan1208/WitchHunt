@@ -459,7 +459,7 @@ public void jouerHunt(Rumeur nomCarte, String nomJoueur) {
     	
     	
     	
-    	
+    	System.out.println("Jouer Hunt");
 
     	
     	//Trouver la carte jouée/selectionée
@@ -734,8 +734,8 @@ public void jouerHunt(Rumeur nomCarte, String nomJoueur) {
     public void jouerWitch(Rumeur nomCarte, Joueur accusateur) {
     	
     	
+    	System.out.println("Jouer Witch");
     	
-    	//Afficher et Choisir quelle carte jouee
     	Iterator<Rumeur> itRum= this.rumeurs.iterator();
     	Rumeur carteJouee = null;
     	while(itRum.hasNext()) {
