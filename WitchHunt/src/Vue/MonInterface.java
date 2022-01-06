@@ -30,7 +30,7 @@ public class MonInterface implements Observer{
 	public Joueur accusateur;
 	public Joueur accusé;
 	
-	public static Rumeur carteJouee;
+	public Rumeur carteJouee;
 	
 	public List<JToggleButton> boutonscartes;
 	
@@ -155,10 +155,10 @@ public class MonInterface implements Observer{
 					for(JToggleButton b : boutonscartes) {
 						
 						if(b.isSelected()){
-							MonInterface.carteJouee=null;
+							carteJouee=null;
 							for(Rumeur rumeur : ((Joueur)instanceObservable).rumeurs) {
 								if(rumeur.nom.equals(b.getText())) {
-									MonInterface.carteJouee = rumeur;
+									carteJouee = rumeur;
 									System.out.println(carteJouee.nom);
 								}
 							}
